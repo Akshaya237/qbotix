@@ -1,0 +1,6873 @@
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #0b0b0b;
+    --panel: #151515;
+    --panel2: #101010;
+    --border: #292929;
+    --border-light: #3b3b3b;
+    --text: #eeeeee;
+    --muted: #858585;
+    --dim: #555555;
+    --green: #8fae98;
+    --red: #b47777;
+}
+
+body.light {
+
+    --bg: #f2f2f2;
+
+    --panel: #ffffff;
+
+    --panel2: #f8f8f8;
+
+    --border: #c8c8c8;
+
+    --border-light: #aaaaaa;
+
+    --text: #111111;
+
+    --muted: #4f4f4f;
+
+    --dim: #666666;
+
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+}
+
+button {
+    font-family: inherit;
+}
+
+/* =========================================================
+   APP
+   ========================================================= */
+
+.app {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.topbar {
+    height: 62px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 20px;
+
+    background: var(--panel2);
+    border-bottom: 1px solid var(--border);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-mark {
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.brand-text h1 {
+    font-size: 15px;
+    letter-spacing: 1.7px;
+}
+
+.brand-text p {
+    margin-top: 3px;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+}
+
+.top-status {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.status-item {
+    text-align: right;
+}
+
+.status-item span {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 8px;
+    color: var(--muted);
+    letter-spacing: 1px;
+}
+
+.status-item strong {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.connection {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.connection-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+}
+
+.connection-dot.offline {
+    background: var(--red);
+}
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.main {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    width: 190px;
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 15px 10px;
+
+    background: var(--panel2);
+    border-right: 1px solid var(--border);
+}
+
+.sidebar-title {
+    padding: 4px 8px 10px;
+    color: var(--dim);
+    font-size: 9px;
+    letter-spacing: 1.5px;
+}
+
+.nav-button {
+    width: 100%;
+    padding: 11px 10px;
+    margin-bottom: 2px;
+
+    border: 1px solid transparent;
+    border-radius: 5px;
+
+    background: transparent;
+    color: #858585;
+
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: .8px;
+
+    cursor: pointer;
+}
+
+.nav-button:hover {
+    background: var(--panel);
+    color: var(--text);
+}
+
+.nav-button.active {
+    background: var(--panel);
+    border-color: var(--border);
+    color: var(--text);
+}
+
+.nav-number {
+    display: inline-block;
+    width: 25px;
+    color: var(--dim);
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+.theme-button {
+    width: 100%;
+    padding: 9px;
+
+    border: 1px solid var(--border);
+    border-radius: 5px;
+
+    background: var(--panel);
+    color: var(--muted);
+
+    font-size: 9px;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+}
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.content {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+
+    padding: 15px;
+
+    overflow: hidden;
+}
+
+.workspace {
+    width: 100%;
+    height: 100%;
+
+    display: none;
+    flex-direction: column;
+}
+
+.workspace.active {
+    display: flex;
+}
+
+/* =========================================================
+   WORKSPACE HEADER
+   ========================================================= */
+
+.workspace-header {
+    height: 55px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.workspace-title h2 {
+    font-size: 24px;
+    letter-spacing: 2px;
+}
+
+.workspace-title p {
+    margin-top: 4px;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 1.4px;
+}
+
+.workspace-status {
+    padding: 8px 13px;
+
+    border: 1px solid var(--border);
+    border-radius: 5px;
+
+    background: var(--panel);
+
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+/* =========================================================
+   COMMON PANEL
+   ========================================================= */
+
+.panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.panel-title {
+    height: 40px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 12px;
+
+    border-bottom: 1px solid var(--border);
+
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.panel-title span:last-child {
+    color: var(--muted);
+}
+
+/* =========================================================
+   GCS
+   ========================================================= */
+
+.gcs-layout {
+    flex: 1;
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.55fr)
+        minmax(280px, .65fr);
+
+    grid-template-rows:
+        minmax(0, 1fr)
+        90px;
+
+    gap: 11px;
+}
+
+.camera-panel {
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================================
+   FOUR CAMERA GRID
+   ========================================================= */
+
+.camera-grid {
+    flex: 1;
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+
+    gap: 8px;
+
+    padding: 8px;
+
+    background: #070707;
+}
+
+.camera-box {
+    position: relative;
+
+    min-width: 0;
+    min-height: 0;
+
+    overflow: hidden;
+
+    background: #000;
+
+    border: 1px solid #272727;
+
+    cursor: pointer;
+}
+
+.camera-box:hover {
+    border-color: #555;
+}
+
+.camera-box video {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+
+    background: #000;
+}
+
+.camera-label {
+    position: absolute;
+
+    top: 7px;
+    left: 7px;
+
+    z-index: 5;
+
+    padding: 5px 8px;
+
+    background: rgba(0,0,0,.75);
+
+    color: #ddd;
+
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.camera-status {
+    position: absolute;
+
+    top: 7px;
+    right: 7px;
+
+    z-index: 5;
+
+    padding: 5px 8px;
+
+    background: rgba(0,0,0,.75);
+
+    color: #aaa;
+
+    font-size: 8px;
+}
+
+.camera-placeholder {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #3e3e3e;
+
+    font-size: 9px;
+    letter-spacing: 1px;
+
+    pointer-events: none;
+}
+
+/* =========================================================
+   FULLSCREEN CAMERA
+   ========================================================= */
+
+.camera-fullscreen {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 10000;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #000;
+}
+
+.camera-fullscreen.active {
+    display: flex;
+}
+
+.camera-fullscreen video {
+    width: 100vw;
+    height: 100vh;
+
+    object-fit: contain;
+
+    background: #000;
+}
+
+.fullscreen-camera-name {
+    position: absolute;
+
+    top: 20px;
+    left: 25px;
+
+    z-index: 20;
+
+    padding: 9px 14px;
+
+    background: rgba(0,0,0,.78);
+
+    border: 1px solid #444;
+
+    color: white;
+
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+
+.fullscreen-camera-status {
+    position: absolute;
+
+    top: 20px;
+    right: 80px;
+
+    z-index: 20;
+
+    padding: 9px 14px;
+
+    background: rgba(0,0,0,.78);
+
+    border: 1px solid #444;
+
+    color: #aaa;
+
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+/* =========================================================
+   FULLSCREEN ARROWS
+   ========================================================= */
+
+.fullscreen-arrow {
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 30;
+
+    width: 62px;
+    height: 92px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #555;
+
+    background: rgba(0,0,0,.68);
+
+    color: white;
+
+    font-size: 35px;
+
+    cursor: pointer;
+
+    transition: background .15s;
+}
+
+.fullscreen-arrow:hover {
+    background: rgba(255,255,255,.18);
+}
+
+.fullscreen-arrow.left {
+    left: 25px;
+}
+
+.fullscreen-arrow.right {
+    right: 25px;
+}
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+.fullscreen-close {
+    position: absolute;
+
+    top: 20px;
+    right: 25px;
+
+    z-index: 30;
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #555;
+    border-radius: 4px;
+
+    background: rgba(0,0,0,.78);
+
+    color: white;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+.fullscreen-close:hover {
+    background: rgba(255,255,255,.18);
+}
+
+.fullscreen-camera-number {
+    position: absolute;
+
+    left: 50%;
+    bottom: 20px;
+
+    transform: translateX(-50%);
+
+    z-index: 20;
+
+    padding: 7px 12px;
+
+    background: rgba(0,0,0,.75);
+
+    border: 1px solid #444;
+
+    color: #aaa;
+
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+/* =========================================================
+   TELEMETRY
+   ========================================================= */
+
+.telemetry-panel {
+    min-height: 0;
+}
+
+.telemetry-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 7px;
+
+    padding: 9px;
+}
+
+.telemetry-item {
+    padding: 9px;
+
+    background: var(--panel2);
+
+    border: 1px solid var(--border);
+
+    border-radius: 5px;
+}
+
+.telemetry-item span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--muted);
+
+    font-size: 8px;
+}
+
+.telemetry-item strong {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   COMPUTE CONNECTIVITY
+   ========================================================= */
+
+.compute-connectivity {
+    margin: 0 9px 9px;
+    padding: 9px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--panel2);
+}
+
+.compute-connectivity-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 8px;
+    letter-spacing: 1px;
+    color: var(--muted);
+}
+
+.compute-connectivity-title span:last-child {
+    color: var(--dim);
+}
+
+.compute-connectivity-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+}
+
+.compute-status-box {
+    min-width: 0;
+    padding: 8px 7px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--panel);
+}
+
+.compute-status-box span {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--muted);
+    font-size: 7px;
+    letter-spacing: .7px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.compute-status-value {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 9px;
+    font-weight: 500;
+}
+
+.compute-status-dot {
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--dim);
+}
+
+.compute-status-value.online {
+    color: var(--green);
+}
+
+.compute-status-value.online .compute-status-dot {
+    background: var(--green);
+}
+
+.compute-status-value.offline {
+    color: var(--red);
+}
+
+.compute-status-value.offline .compute-status-dot {
+    background: var(--red);
+}
+
+/* =========================================================
+   CAMERA PERFORMANCE
+   ========================================================= */
+
+.camera-performance {
+    position: absolute;
+    right: 7px;
+    bottom: 7px;
+    z-index: 10;
+    padding: 5px 7px;
+    background: rgba(0, 0, 0, .78);
+    border: 1px solid rgba(255, 255, 255, .10);
+    border-radius: 3px;
+    color: #b8b8b8;
+    font-size: 8px;
+    letter-spacing: .5px;
+    pointer-events: none;
+}
+
+.fullscreen-camera-performance {
+    position: absolute;
+    right: 25px;
+    bottom: 20px;
+    z-index: 30;
+    padding: 7px 10px;
+    background: rgba(0, 0, 0, .80);
+    border: 1px solid #444;
+    border-radius: 4px;
+    color: #b8b8b8;
+    font-size: 9px;
+    letter-spacing: .7px;
+    pointer-events: none;
+}
+
+/* =========================================================
+   GCS RIGHT STACK
+   ========================================================= */
+
+.gcs-right-stack {
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.gcs-right-stack .telemetry-panel {
+    flex: 1;
+    min-height: 0;
+}
+
+.gcs-right-stack .compute-connectivity {
+    flex: 0 0 auto;
+    margin: 0;
+}
+
+/* =========================================================
+   GCS BOTTOM
+   ========================================================= */
+
+.gcs-bottom {
+    grid-column: 1 / -1;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr;
+
+    gap: 11px;
+}
+
+.control-area {
+    padding: 10px;
+}
+
+/* =========================================================
+   MOVEMENT
+   ========================================================= */
+
+.direction-pad {
+    width: 165px;
+
+    margin: 10px auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 52px);
+    grid-template-rows: repeat(3, 36px);
+
+    gap: 4px;
+}
+
+.direction-button {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+
+    background: var(--panel2);
+    color: var(--text);
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+.direction-button:hover {
+    background: var(--text);
+    color: var(--bg);
+}
+
+.direction-button.stop {
+    font-size: 8px;
+}
+
+/* =========================================================
+   LOG
+   ========================================================= */
+
+.log {
+    height: 115px;
+
+    overflow-y: auto;
+
+    padding: 9px;
+
+    color: var(--muted);
+
+    font-size: 8px;
+
+    line-height: 1.8;
+}
+
+/* =========================================================
+   COMMAND BUTTONS
+   ========================================================= */
+
+.command-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.command-button {
+    padding: 9px 13px;
+
+    border: 1px solid var(--border);
+    border-radius: 5px;
+
+    background: var(--panel2);
+    color: var(--text);
+
+    font-size: 8px;
+    letter-spacing: .8px;
+
+    cursor: pointer;
+}
+
+.command-button:hover {
+    background: var(--text);
+    color: var(--bg);
+}
+
+.command-button.start {
+    color: var(--green);
+}
+
+.command-button.stop {
+    color: var(--red);
+}
+
+/* =========================================================
+   ABEX
+   ========================================================= */
+
+
+.abex-layout {
+    flex: 1;
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.05fr)
+        minmax(360px, .95fr);
+
+    grid-template-rows:
+        minmax(0, 1fr)
+        minmax(0, 1fr)
+        minmax(0, 1fr)
+        65px;
+
+    gap: 10px;
+}
+
+
+.abex-panel {
+    min-height: 0;
+}
+
+
+.single-video {
+    position: relative;
+
+    height: calc(100% - 40px);
+
+    background: #000;
+}
+
+
+.single-video video {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    background: #000;
+}
+
+
+.video-empty {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #444;
+
+    font-size: 9px;
+    letter-spacing: 1px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   ABEX ENVIRONMENT DATA
+   ========================================================= */
+
+.abex-environment {
+    min-height: 0;
+}
+
+
+.abex-environment-grid {
+    height: calc(100% - 40px);
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    grid-template-rows:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 7px;
+
+    padding: 9px;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+
+    align-content: stretch;
+}
+
+
+.abex-environment-item {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    min-width: 0;
+
+    padding: 8px 10px;
+
+    background: var(--panel2);
+
+    border: 1px solid var(--border);
+
+    border-radius: 4px;
+}
+
+
+.abex-environment-item span {
+    color: var(--muted);
+
+    font-size: 8px;
+    letter-spacing: .5px;
+
+    white-space: nowrap;
+}
+
+
+.abex-environment-item strong {
+    color: var(--text);
+
+    font-size: 11px;
+    font-weight: 500;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   ABEX MICROSCOPE CAMERA
+   ========================================================= */
+
+.abex-microscope {
+    min-height: 0;
+}
+
+
+.abex-microscope .single-video {
+    height: calc(100% - 40px);
+}
+
+
+/* =========================================================
+   O2 / NPK / BME
+   ========================================================= */
+
+.abex-sensor-info {
+    min-height: 0;
+    overflow: hidden;
+}
+
+
+.abex-sensor-info-grid {
+    height: calc(100% - 40px);
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 7px;
+
+    padding: 9px;
+
+    box-sizing: border-box;
+}
+
+
+.abex-device-card {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    min-width: 0;
+
+    padding: 9px;
+
+    background: var(--panel2);
+
+    border: 1px solid var(--border);
+
+    border-radius: 5px;
+}
+
+
+.abex-device-card > span {
+    margin-bottom: 6px;
+
+    color: var(--muted);
+
+    font-size: 8px;
+    letter-spacing: .8px;
+}
+
+
+.abex-device-value {
+    color: var(--text);
+
+    font-size: 13px;
+    font-weight: 500;
+}
+
+
+.abex-device-sub {
+    margin-top: 4px;
+
+    color: var(--dim);
+
+    font-size: 7px;
+    letter-spacing: .4px;
+}
+
+
+/* =========================================================
+   SPECTROMETER
+   ========================================================= */
+
+.spectrum {
+    position: relative;
+
+    height: calc(100% - 40px);
+
+    background: #080808;
+}
+
+
+#spectrumCanvas {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* =========================================================
+   ABEX CONTROLS
+   ========================================================= */
+
+.abex-controls {
+    grid-column: 1 / -1;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px;
+
+    background: var(--panel);
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+}
+
+
+.test-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+
+.test-button {
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid var(--border);
+    border-radius: 4px;
+
+    background: var(--panel2);
+    color: var(--text);
+
+    font-size: 9px;
+
+    cursor: pointer;
+}
+
+
+.test-button:hover,
+.test-button.active {
+    background: var(--text);
+    color: var(--bg);
+}
+
+
+.abex-action-group {
+    display: flex;
+    gap: 6px;
+}
+
+/* =========================================================
+   RADO
+   ========================================================= */
+
+.rado-layout {
+    flex: 1;
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    grid-template-rows:
+        minmax(0, 1fr)
+        minmax(190px, .58fr);
+
+    gap: 10px;
+
+    align-items: stretch;
+}
+
+.rado-map {
+    min-height: 0;
+}
+
+.map-area {
+    position: relative;
+
+    height: calc(100% - 40px);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent 49%,
+            #222 50%,
+            transparent 51%
+        ),
+
+        linear-gradient(
+            transparent 49%,
+            #222 50%,
+            transparent 51%
+        );
+
+    background-size: 45px 45px;
+}
+
+.rover-marker {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 22px;
+    height: 22px;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(45deg);
+
+    border: 2px solid var(--green);
+}
+
+.target-marker {
+    position: absolute;
+
+    right: 25%;
+    top: 30%;
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: var(--red);
+}
+
+.rado-camera {
+    height: calc(100% - 40px);
+
+    min-height: 0;
+
+    background: #000;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+.rado-camera video {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    background: #000;
+}
+
+.rado-camera video {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+}
+
+.rado-controls {
+    grid-column: 1 / -1;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    gap: 10px;
+
+    min-height: 0;
+
+    align-items: stretch;
+}
+
+.rado-controls .rado-control-card {
+    min-height: 0;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+.rado-status-grid {
+    height: 100%;
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    grid-template-rows:
+        1fr 1fr;
+
+    gap: 8px;
+}
+
+.rado-status-grid .rado-value {
+    min-height: 0;
+}
+
+.rado-control-card {
+    min-width: 0;
+    min-height: 0;
+
+    padding: 10px;
+
+    background: var(--panel);
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+
+    box-sizing: border-box;
+}
+
+.rado-control-card h3 {
+    margin-bottom: 8px;
+
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.rado-status-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 6px;
+}
+
+.rado-value {
+    padding: 8px;
+
+    background: var(--panel2);
+
+    border: 1px solid var(--border);
+
+    border-radius: 4px;
+}
+
+.rado-value span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--muted);
+
+    font-size: 7px;
+}
+
+.rado-value strong {
+    font-size: 12px;
+}
+
+/* =========================================================
+   IDMO
+   ========================================================= */
+
+.idm-layout {
+    flex: 1;
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.15fr)
+        minmax(300px, .85fr);
+
+    grid-template-rows:
+        minmax(0, 1fr)
+        175px;
+
+    gap: 10px;
+}
+
+.idm-video {
+    position: relative;
+
+    height: calc(100% - 40px);
+
+    background: #000;
+}
+
+.idm-video video {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+}
+
+.joint-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 7px;
+
+    padding: 10px;
+}
+
+.joint {
+    padding: 11px;
+
+    background: var(--panel2);
+
+    border: 1px solid var(--border);
+
+    border-radius: 5px;
+}
+
+.joint span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--muted);
+
+    font-size: 8px;
+}
+
+.joint strong {
+    font-size: 16px;
+}
+
+.idm-bottom {
+    grid-column: 1 / -1;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+.idm-controls {
+    padding: 10px;
+}
+
+
+/* =========================================================
+   LIGHT MODE — HIGH CONTRAST
+   ========================================================= */
+
+body.light * {
+    opacity: 1;
+}
+
+body.light .brand-text h1,
+body.light .workspace-title h2,
+body.light .panel-title,
+body.light .status-item strong,
+body.light .telemetry-item strong,
+body.light .compute-status-value,
+body.light .nav-button.active {
+    color: var(--text);
+}
+
+body.light .brand-text p,
+body.light .workspace-title p,
+body.light .panel-title span:last-child,
+body.light .status-item span,
+body.light .sidebar-title,
+body.light .telemetry-item span,
+body.light .compute-status-box span,
+body.light .compute-connectivity-title,
+body.light .compute-connectivity-title span:last-child {
+    color: var(--muted);
+}
+
+body.light .nav-button {
+    color: #3f3f3f;
+}
+
+body.light .nav-button:hover {
+    color: #111111;
+}
+
+body.light .theme-button,
+body.light .command-button,
+body.light .test-button {
+    color: #222222;
+}
+
+body.light .workspace-status {
+    color: #222222;
+}
+
+body.light .camera-label,
+body.light .camera-status,
+body.light .camera-performance {
+    opacity: 1;
+}
+
+body.light .command-button.start,
+body.light .compute-status-value.online {
+    color: #315f42;
+}
+
+body.light .command-button.stop,
+body.light .compute-status-value.offline {
+    color: #8a3838;
+}
+
+
+/* =========================================================
+   TOP RIGHT — CONNECTION ONLY
+   ========================================================= */
+
+.top-status {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.top-status .connection {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text);
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.top-status .connection-dot {
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+    border-radius: 50%;
+}
+
+.top-status .connection-dot.offline {
+    background: var(--red);
+}
+
+.top-status .connection-dot:not(.offline) {
+    background: var(--green);
+}
+
+/* =========================================================
+   STREAMING TOGGLE + TIMER
+========================================================= */
+
+.stream-control {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.stream-toggle {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    height: 30px;
+    padding: 0 10px;
+
+    border: 1px solid var(--border);
+    border-radius: 5px;
+
+    background: var(--panel);
+    color: var(--muted);
+
+    font-size: 8px;
+    letter-spacing: .8px;
+
+    cursor: pointer;
+    transition: .15s ease;
+}
+
+.stream-toggle:hover {
+    background: var(--text);
+    color: var(--bg);
+}
+
+.stream-toggle-dot {
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+
+    border-radius: 50%;
+    background: var(--red);
+}
+
+.stream-toggle.active {
+    color: var(--green);
+    border-color: var(--border-light);
+}
+
+.stream-toggle.active .stream-toggle-dot {
+    background: var(--green);
+}
+
+.stream-timer {
+    min-width: 66px;
+
+    padding: 7px 8px;
+
+    border: 1px solid var(--border);
+    border-radius: 5px;
+
+    background: var(--panel);
+    color: var(--muted);
+
+    font-size: 9px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+
+/* =========================================================
+   ABEX RESPONSIVE LAYOUT
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .abex-layout {
+
+        grid-template-columns:
+            1fr 1fr;
+
+        grid-template-rows:
+            repeat(3, minmax(190px, 1fr))
+            65px;
+
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .abex-layout {
+
+        grid-template-columns:
+            1fr;
+
+        grid-template-rows:
+            repeat(6, minmax(180px, 1fr))
+            65px;
+
+        overflow-y: auto;
+
+    }
+
+    .abex-controls {
+        grid-column: 1;
+    }
+
+    .abex-sensor-info-grid {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   ABEX CAMERA FULLSCREEN
+   ========================================================= */
+
+.abex-camera-click {
+    cursor: pointer;
+}
+
+.abex-fullscreen-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 2000;
+
+    display: none;
+
+    flex-direction: column;
+
+    background: #000;
+
+    padding: 14px;
+
+    box-sizing: border-box;
+}
+
+.abex-fullscreen-overlay.active {
+    display: flex;
+}
+
+.abex-fullscreen-header {
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    flex-shrink: 0;
+
+    padding: 0 2px;
+
+    color: #ddd;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.abex-fullscreen-close {
+    padding: 7px 12px;
+
+    border: 1px solid #444;
+    border-radius: 4px;
+
+    background: #111;
+
+    color: #bbb;
+
+    font-size: 8px;
+    letter-spacing: .8px;
+
+    cursor: pointer;
+}
+
+.abex-fullscreen-close:hover {
+    background: #222;
+    color: #fff;
+}
+
+.abex-fullscreen-video-wrap {
+    flex: 1;
+
+    min-height: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #000;
+
+    border: 1px solid #222;
+
+    overflow: hidden;
+}
+
+.abex-fullscreen-video-wrap video {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    background: #000;
+}
+
+
+/* =========================================================
+   ABEX CAMERA LATENCY + FPS
+   ========================================================= */
+
+.abex-camera-performance {
+    position: absolute;
+
+    right: 8px;
+    bottom: 8px;
+
+    z-index: 10;
+
+    padding: 6px 8px;
+
+    background: rgba(0, 0, 0, .78);
+
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 4px;
+
+    color: #bdbdbd;
+
+    font-size: 8px;
+    letter-spacing: .5px;
+
+    pointer-events: none;
+
+    white-space: nowrap;
+}
+
+
+.abex-fullscreen-performance {
+    position: absolute;
+
+    right: 24px;
+    bottom: 24px;
+
+    z-index: 30;
+
+    padding: 8px 11px;
+
+    background: rgba(0, 0, 0, .82);
+
+    border: 1px solid #444;
+
+    border-radius: 4px;
+
+    color: #c7c7c7;
+
+    font-size: 9px;
+    letter-spacing: .7px;
+
+    pointer-events: none;
+
+    white-space: nowrap;
+}
+
+
+/* Environmental data — scroll only inside this panel */
+.abex-environment {
+    overflow: hidden;
+}
+
+.abex-environment-grid {
+    min-height: 0;
+}
+
+
+/* =========================================================
+   GCS SYSTEM LOG — COMPACT
+   ========================================================= */
+
+#gcs #systemLog {
+    max-height: 58px;
+    overflow-y: auto;
+}
+
+
+/* RADO Object / Target revealed from Reconnaissance */
+.rado-object-target {
+    margin-top: 10px;
+    padding-top: 9px;
+    border-top: 1px solid var(--border);
+}
+
+.rado-object-target h3 {
+    margin: 0 0 8px 0;
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .8px;
+}
+
+/* =========================================================
+   RADO — LAYOUT ONLY
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .rado-layout {
+        grid-template-columns:
+            1fr;
+
+        grid-template-rows:
+            minmax(260px, 1fr)
+            minmax(220px, 1fr)
+            auto;
+
+        overflow-y: auto;
+    }
+
+    .rado-controls {
+        grid-column: 1;
+
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+
+/* =========================================================
+   RADO — SCREENSHOT-STYLE BALANCED LAYOUT
+   Layout only; no RADO content/function changes.
+========================================================= */
+
+@media (min-width: 1000px) {
+
+    .rado-layout {
+        grid-template-rows:
+            minmax(0, 1fr)
+            minmax(190px, .58fr);
+    }
+
+}
+
+@media (max-width: 900px) {
+
+    .rado-layout {
+        grid-template-columns:
+            1fr;
+
+        grid-template-rows:
+            minmax(260px, 1fr)
+            minmax(260px, 1fr)
+            auto;
+
+        overflow-y: auto;
+    }
+
+    .rado-controls {
+        grid-column: 1;
+
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+
+/* =========================================================
+   RADO MODE TABS — RADO ONLY
+========================================================= */
+
+#radoWorkspace .rado-mode-tabs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+#radoWorkspace .rado-mode-tab {
+    height: 34px;
+    padding: 0 14px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--panel);
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: .6px;
+    cursor: pointer;
+}
+
+#radoWorkspace .rado-mode-tab.active {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+}
+
+/* ABEX ONLY — A/B/C/D/E + PANORAMA in the existing blank area */
+#abexWorkspace .abex-controls-space {
+    min-width: 0;
+    min-height: 0;
+    padding: 10px;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#abexWorkspace .abex-controls-space .abex-controls {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+
+#abexWorkspace .abex-controls-space .test-buttons,
+#abexWorkspace .abex-controls-space .abex-action-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+
+
+
+/* RADO AUTONOMOUS VISIBILITY FIX */
+
+#radoWorkspace {
+    min-height: 0;
+}
+
+#radoWorkspace .rado-mode-view {
+    width: 100%;
+    min-height: 0;
+}
+
+#radoWorkspace #radoAutonomousView {
+    width: 100%;
+    min-height: 0;
+    box-sizing: border-box;
+}
+
+#radoWorkspace #radoAutonomousView[style*="display: block"] {
+    display: block !important;
+}
+
+#radoWorkspace #radoReconView[style*="display: none"] {
+    display: none !important;
+}
+
+
+/* RADO AUTONOMOUS FINAL DISPLAY FIX */
+
+#radoWorkspace #radoAutonomousView {
+    display: none;
+    width: 100%;
+    min-height: 620px;
+    height: auto;
+    box-sizing: border-box;
+}
+
+#radoWorkspace #radoAutonomousView[style*="display: block"] {
+    display: block !important;
+}
+
+#radoWorkspace #radoAutonomousView .rado-auto-dashboard {
+    width: 100%;
+    min-height: 620px;
+    height: 620px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   RADO RECONNAISSANCE CAMERA LAYOUT ONLY
+   Autonomous Mode is intentionally untouched.
+========================================================= */
+
+#radoWorkspace #radoReconView .rado-recon-cameras-panel {
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-grid {
+    height: calc(100% - 40px);
+
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    grid-template-rows:
+        1fr 1fr;
+
+    gap: 8px;
+
+    padding: 8px;
+
+    box-sizing: border-box;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-card {
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #000;
+
+    border: 1px solid var(--border);
+
+    overflow: hidden;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-name {
+    flex: 0 0 30px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 10px;
+
+    background: var(--panel2);
+
+    color: var(--text);
+
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: .8px;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-feed {
+    position: relative;
+
+    flex: 1;
+    min-height: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #000;
+
+    overflow: hidden;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-feed video {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    background: #000;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-placeholder {
+    position: absolute;
+
+    color: var(--muted);
+
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    pointer-events: none;
+}
+
+
+/* RADO RECON FULLSCREEN CAMERA METRICS */
+
+#radoWorkspace #radoReconView .rado-recon-camera-feed {
+    cursor: pointer;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-feed:hover {
+    outline: 1px solid var(--text);
+}
+
+#radoWorkspace #radoReconView .recon-camera-metrics {
+    position: absolute;
+
+    right: 7px;
+    bottom: 7px;
+
+    z-index: 5;
+
+    padding: 6px 8px;
+
+    background: rgba(0, 0, 0, .78);
+
+    border: 1px solid var(--border);
+    border-radius: 4px;
+
+    color: var(--text);
+
+    font-size: 8px;
+    letter-spacing: .5px;
+
+    pointer-events: none;
+}
+
+.rado-recon-fullscreen {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 30000;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #000;
+}
+
+.rado-recon-fullscreen.active {
+    display: flex;
+}
+
+.rado-recon-fullscreen video {
+    width: 100vw;
+    height: 100vh;
+
+    object-fit: contain;
+
+    background: #000;
+}
+
+.rado-recon-fullscreen-name,
+.rado-recon-fullscreen-status,
+.rado-recon-fullscreen-metrics {
+    position: absolute;
+
+    z-index: 10;
+
+    padding: 9px 13px;
+
+    background: rgba(0, 0, 0, .78);
+
+    border: 1px solid #444;
+    border-radius: 4px;
+
+    color: #fff;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.rado-recon-fullscreen-name {
+    top: 20px;
+    left: 25px;
+}
+
+.rado-recon-fullscreen-status {
+    top: 20px;
+    right: 80px;
+}
+
+.rado-recon-fullscreen-metrics {
+    left: 25px;
+    bottom: 20px;
+}
+
+.rado-recon-fullscreen-close {
+    position: absolute;
+
+    top: 18px;
+    right: 20px;
+
+    z-index: 20;
+
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid #555;
+
+    background: rgba(0, 0, 0, .75);
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+
+
+
+/* =========================================================
+   RADO — AUTONOMOUS DELIVERY VIEW ONLY
+========================================================= */
+
+.rado-mode-view {
+    flex: 1;
+    min-height: 0;
+}
+
+
+.rado-autonomous-view {
+    flex: 1;
+    min-height: 0;
+}
+
+
+.rado-auto-dashboard {
+    height: 100%;
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 2fr)
+        minmax(300px, 1fr);
+
+    grid-template-rows:
+        minmax(235px, .9fr)
+        minmax(235px, 1fr);
+
+    gap: 10px;
+}
+
+
+.rado-auto-main {
+    min-width: 0;
+    min-height: 0;
+}
+
+
+.rado-auto-main .panel-title {
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+.rado-auto-info-grid {
+    height: calc(100% - 40px);
+
+    padding: 8px;
+
+    box-sizing: border-box;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr 1fr;
+
+    gap: 8px;
+}
+
+
+.rado-auto-info-card {
+    min-width: 0;
+    min-height: 0;
+
+    padding: 12px;
+
+    background: var(--panel2);
+
+    border: 1px solid var(--border);
+
+    border-radius: 6px;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+}
+
+
+.rado-auto-card-title {
+    margin-bottom: 18px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+    font-weight: 600;
+
+    text-align: center;
+}
+
+
+.rado-auto-empty {
+    height: calc(100% - 35px);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+.rado-auto-data-row {
+    display: flex;
+
+    align-items: baseline;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 12px;
+
+    color: var(--text);
+
+    font-size: 12px;
+}
+
+
+.rado-auto-data-row strong {
+    text-align: right;
+
+    white-space: nowrap;
+
+    color: var(--text);
+}
+
+
+.rado-auto-data-row:nth-child(4) strong {
+    color: var(--accent, #6fa8ff);
+}
+
+
+.rado-auto-gps-panel {
+    min-width: 0;
+    min-height: 0;
+}
+
+
+.rado-auto-gps-map {
+    position: relative;
+
+    height: calc(100% - 40px);
+
+    margin: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1c3440,
+            #273b32 45%,
+            #25332b
+        );
+
+    border: 1px solid var(--border);
+
+    border-radius: 5px;
+
+    overflow: hidden;
+}
+
+
+.rado-auto-gps-map::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent 49%,
+            rgba(255,255,255,.08) 50%,
+            transparent 51%
+        ),
+        linear-gradient(
+            transparent 49%,
+            rgba(255,255,255,.08) 50%,
+            transparent 51%
+        );
+
+    background-size: 90px 90px;
+
+    opacity: .6;
+}
+
+
+.rado-auto-gps-map .rover-marker {
+    position: absolute;
+
+    left: 55%;
+    top: 48%;
+
+    width: 16px;
+    height: 16px;
+
+    border-radius: 50%;
+
+    background: #2f7cff;
+
+    border: 3px solid rgba(255,255,255,.8);
+
+    box-shadow: 0 0 0 2px rgba(47,124,255,.35);
+
+    z-index: 2;
+}
+
+
+.rado-auto-remote {
+    min-width: 0;
+    min-height: 0;
+}
+
+
+.rado-auto-remote-screen {
+    height: calc(100% - 40px);
+
+    margin: 8px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #111;
+
+    border: 1px solid var(--border);
+
+    border-radius: 5px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+.rado-auto-cv {
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+
+.rado-auto-cv-screen {
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
+
+    margin: 8px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #111;
+
+    border: 1px dashed var(--border);
+
+    border-radius: 5px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+@media (max-width: 900px) {
+
+    .rado-auto-dashboard {
+        grid-template-columns: 1fr;
+
+        grid-template-rows:
+            auto
+            260px
+            260px
+            260px;
+
+        overflow-y: auto;
+    }
+
+
+    .rado-auto-info-grid {
+        grid-template-columns:
+            1fr;
+
+        height: auto;
+    }
+
+}
+
+/* =========================================================
+   IDMO — MANIPULATOR OPERATIONS
+   Scoped only to #idmoWorkspace
+========================================================= */
+
+#idmoWorkspace {
+    box-sizing: border-box;
+    padding: 18px 16px 12px;
+    gap: 12px;
+    overflow: hidden;
+}
+
+
+#idmoWorkspace .idmo-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex: 0 0 auto;
+}
+
+
+#idmoWorkspace .idmo-header h1 {
+    margin: 0;
+    font-size: 26px;
+    line-height: 1;
+    letter-spacing: .5px;
+}
+
+
+#idmoWorkspace .idmo-subtitle {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 1.6px;
+}
+
+
+#idmoWorkspace .idmo-top-grid {
+    flex: 1 1 auto;
+    min-height: 0;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(390px, 1fr);
+    gap: 10px;
+}
+
+
+#idmoWorkspace .idmo-bottom-grid {
+    flex: 0 0 190px;
+    min-height: 160px;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(390px, 1fr);
+    gap: 10px;
+}
+
+
+#idmoWorkspace .idmo-camera-panel,
+#idmoWorkspace .idmo-arm-status,
+#idmoWorkspace .idmo-gripper-panel,
+#idmoWorkspace .idmo-manipulator-status {
+    min-width: 0;
+    min-height: 0;
+}
+
+
+#idmoWorkspace .idmo-camera-view {
+    position: relative;
+    height: calc(100% - 40px);
+    margin: 0 8px 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #000;
+    overflow: hidden;
+}
+
+
+#idmoWorkspace .idmo-camera-view video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+#idmoWorkspace .idmo-camera-placeholder {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #454545;
+    font-size: 11px;
+    letter-spacing: 1px;
+    pointer-events: none;
+}
+
+
+#idmoWorkspace .idmo-joint-grid {
+    height: calc(100% - 40px);
+    padding: 8px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 8px;
+    box-sizing: border-box;
+}
+
+
+#idmoWorkspace .idmo-joint-card,
+#idmoWorkspace .idmo-status-card {
+    min-width: 0;
+    padding: 10px 12px;
+
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+#idmoWorkspace .idmo-joint-card span,
+#idmoWorkspace .idmo-status-card span {
+    color: var(--muted);
+    font-size: 8px;
+    letter-spacing: .7px;
+}
+
+
+#idmoWorkspace .idmo-joint-card strong {
+    margin-top: 5px;
+    color: var(--text);
+    font-size: 17px;
+}
+
+
+#idmoWorkspace .idmo-command-row {
+    padding: 8px 12px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+
+#idmoWorkspace .idmo-command-row button {
+    min-width: 58px;
+    height: 32px;
+
+    padding: 0 12px;
+
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+
+    color: var(--text);
+    font-size: 9px;
+    letter-spacing: .4px;
+
+    cursor: pointer;
+}
+
+
+#idmoWorkspace .idmo-command-row button:hover {
+    border-color: var(--text);
+}
+
+
+#idmoWorkspace .idmo-command-row .idmo-stop-button {
+    color: var(--red);
+}
+
+
+#idmoWorkspace .idmo-status-grid {
+    height: calc(100% - 40px);
+    padding: 8px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    box-sizing: border-box;
+}
+
+
+#idmoWorkspace .idmo-status-card strong {
+    margin-top: 5px;
+    color: var(--text);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+@media (max-width: 1000px) {
+
+    #idmoWorkspace {
+        overflow-y: auto;
+    }
+
+    #idmoWorkspace .idmo-top-grid,
+    #idmoWorkspace .idmo-bottom-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #idmoWorkspace .idmo-top-grid {
+        min-height: 500px;
+    }
+
+    #idmoWorkspace .idmo-bottom-grid {
+        flex: 0 0 auto;
+    }
+
+}
+
+
+/* IDMO ANTENNA CAMERA FULLSCREEN — IDMO ONLY */
+
+#idmoWorkspace .idmo-antenna-click {
+    cursor: pointer;
+}
+
+
+#idmoWorkspace .idmo-antenna-click:hover {
+    border-color: var(--text);
+}
+
+
+.idmo-antenna-fullscreen {
+    position: fixed;
+    inset: 0;
+
+    z-index: 20000;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #000;
+}
+
+
+.idmo-antenna-fullscreen.active {
+    display: flex;
+}
+
+
+.idmo-antenna-fullscreen video {
+    width: 100vw;
+    height: 100vh;
+
+    object-fit: contain;
+
+    background: #000;
+}
+
+
+.idmo-antenna-fullscreen-title {
+    position: absolute;
+
+    top: 20px;
+    left: 25px;
+
+    z-index: 10;
+
+    padding: 9px 14px;
+
+    background: rgba(0,0,0,.78);
+
+    border: 1px solid #444;
+
+    color: white;
+
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+
+
+.idmo-antenna-fullscreen-status {
+    position: absolute;
+
+    top: 20px;
+    right: 80px;
+
+    z-index: 10;
+
+    padding: 9px 14px;
+
+    background: rgba(0,0,0,.78);
+
+    border: 1px solid #444;
+
+    color: #aaa;
+
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+
+.idmo-antenna-fullscreen-close {
+    position: absolute;
+
+    top: 18px;
+    right: 20px;
+
+    z-index: 20;
+
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid #555;
+
+    background: rgba(0,0,0,.75);
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+
+/* IDMO ARM + ANTENNA CAMERA FULLSCREEN */
+
+#idmoWorkspace .idmo-camera-click {
+    cursor: pointer;
+}
+
+#idmoWorkspace .idmo-camera-click:hover {
+    border-color: var(--text);
+}
+
+.idmo-camera-fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 20000;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    background: #000;
+}
+
+.idmo-camera-fullscreen.active {
+    display: flex;
+}
+
+.idmo-camera-fullscreen video {
+    width: 100vw;
+    height: 100vh;
+
+    object-fit: contain;
+
+    background: #000;
+}
+
+.idmo-camera-fullscreen-title,
+.idmo-camera-fullscreen-status,
+.idmo-camera-fullscreen-performance {
+    position: absolute;
+    z-index: 10;
+
+    padding: 9px 14px;
+
+    background: rgba(0,0,0,.78);
+    border: 1px solid #444;
+
+    color: white;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.idmo-camera-fullscreen-title {
+    top: 20px;
+    left: 25px;
+}
+
+.idmo-camera-fullscreen-status {
+    top: 20px;
+    right: 170px;
+    color: #aaa;
+}
+
+.idmo-camera-fullscreen-performance {
+    left: 25px;
+    bottom: 20px;
+    color: #ddd;
+}
+
+.idmo-camera-fullscreen-close {
+    position: absolute;
+
+    top: 18px;
+    right: 20px;
+
+    z-index: 20;
+
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid #555;
+
+    background: rgba(0,0,0,.75);
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+/* =========================================================
+   GCS — CAMERA FIRST LAYOUT
+   ========================================================= */
+
+/* ---------- GCS SCROLL ---------- */
+
+#gcsWorkspace {
+    height: auto !important;
+    min-height: 100%;
+    overflow-y: auto !important;
+    overflow-x: hidden;
+    padding-right: 6px;
+}
+
+#gcsWorkspace .gcs-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px;
+    height: auto !important;
+    min-height: calc(100vh - 130px);
+}
+
+
+/* =========================================================
+   LEFT MISSION NAVIGATION
+   ========================================================= */
+
+body:has(#gcsWorkspace.active) .sidebar {
+    width: 58px;
+    padding: 15px 6px;
+    overflow: hidden;
+    transition: width .2s ease;
+    position: relative;
+    z-index: 1000;
+}
+
+body:has(#gcsWorkspace.active) .sidebar:hover {
+    width: 190px;
+    padding: 15px 10px;
+}
+
+body:has(#gcsWorkspace.active) .sidebar-title {
+    opacity: 0;
+    white-space: nowrap;
+    transition: opacity .15s ease;
+}
+
+body:has(#gcsWorkspace.active) .sidebar:hover .sidebar-title {
+    opacity: 1;
+}
+
+body:has(#gcsWorkspace.active) .nav-button {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   CAMERA PANEL
+   ========================================================= */
+
+#gcsWorkspace .camera-panel {
+    width: 100%;
+    height: calc(100vh - 150px);
+    min-height: 520px;
+    flex: 0 0 auto;
+}
+
+#gcsWorkspace .camera-grid {
+    width: 100%;
+    height: calc(100% - 40px);
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+
+    gap: 6px;
+    padding: 6px;
+}
+
+#gcsWorkspace .camera-box {
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   CAMERA VIDEO
+   ========================================================= */
+
+#gcsWorkspace .camera-box video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+}
+
+
+/* =========================================================
+   CAMERA LABEL
+   ========================================================= */
+
+#gcsWorkspace .camera-label {
+    font-size: 12px;
+    padding: 7px 10px;
+}
+
+#gcsWorkspace .camera-status {
+    font-size: 11px;
+    padding: 7px 10px;
+}
+
+
+/* =========================================================
+   CAMERA LATENCY + FPS
+   ========================================================= */
+
+#gcsWorkspace .camera-performance {
+    right: 9px;
+    bottom: 9px;
+
+    padding: 7px 10px;
+
+    font-size: 11px;
+    letter-spacing: .7px;
+
+    background: rgba(0,0,0,.82);
+}
+
+
+/* =========================================================
+   CAMERA TILE ARROWS
+   ========================================================= */
+
+#gcsWorkspace .camera-tile-arrow {
+    position: absolute;
+
+    top: 50%;
+    transform: translateY(-50%);
+
+    z-index: 20;
+
+    width: 46px;
+    height: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #555;
+    border-radius: 6px;
+
+    background: rgba(0,0,0,.72);
+
+    color: #fff;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    opacity: .95;
+
+    transition:
+        background .15s ease,
+        opacity .15s ease;
+}
+
+#gcsWorkspace .camera-tile-arrow:hover {
+    background: rgba(255,255,255,.18);
+    opacity: 1;
+}
+
+#gcsWorkspace .camera-tile-arrow-left {
+    left: 10px;
+}
+
+#gcsWorkspace .camera-tile-arrow-right {
+    right: 10px;
+}
+
+
+/* =========================================================
+   DETAILS BELOW CAMERA
+   ========================================================= */
+
+#gcsWorkspace .gcs-right-stack {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    flex: 0 0 auto;
+}
+
+#gcsWorkspace .telemetry-panel,
+#gcsWorkspace .compute-connectivity {
+    min-height: 210px;
+}
+
+#gcsWorkspace .compute-connectivity {
+    margin: 0;
+}
+
+
+/* =========================================================
+   TELEMETRY FONT SIZE
+   ========================================================= */
+
+#gcsWorkspace .panel-title {
+    height: 46px;
+    font-size: 12px;
+}
+
+#gcsWorkspace .telemetry-item {
+    padding: 13px;
+}
+
+#gcsWorkspace .telemetry-item span {
+    font-size: 10px;
+}
+
+#gcsWorkspace .telemetry-item strong {
+    font-size: 19px;
+}
+
+
+/* =========================================================
+   COMPUTE STATUS FONT SIZE
+   ========================================================= */
+
+#gcsWorkspace .compute-connectivity-title {
+    font-size: 10px;
+}
+
+#gcsWorkspace .compute-status-box span {
+    font-size: 9px;
+}
+
+#gcsWorkspace .compute-status-value {
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   SYSTEM LOG
+   ========================================================= */
+
+#gcsWorkspace .log {
+    height: 150px;
+    min-height: 150px;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   FULLSCREEN CAMERA
+   ========================================================= */
+
+#cameraFullscreen .fullscreen-camera-name,
+#cameraFullscreen .fullscreen-camera-status {
+    font-size: 13px;
+}
+
+#cameraFullscreen .fullscreen-camera-performance {
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   SMALL SCREEN
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    #gcsWorkspace .gcs-right-stack {
+        grid-template-columns: 1fr;
+    }
+
+    #gcsWorkspace .camera-panel {
+        height: calc(100vh - 145px);
+        min-height: 460px;
+    }
+
+}
+
+/* =========================================================
+   QBOTIX ROVER 2027 — FINAL GUI OVERRIDES
+   ========================================================= */
+
+
+/* =========================================================
+   1. GLOBAL FONT SIZE
+   ========================================================= */
+
+body {
+    font-size: 14px !important;
+}
+
+.topbar .brand-text h1 {
+    font-size: 18px !important;
+}
+
+.topbar .brand-text p {
+    font-size: 11px !important;
+}
+
+.status-item span {
+    font-size: 10px !important;
+}
+
+.status-item strong {
+    font-size: 14px !important;
+}
+
+.nav-button {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+}
+
+.nav-number {
+    font-size: 14px !important;
+    font-weight: 800 !important;
+}
+
+.sidebar-title {
+    font-size: 11px !important;
+}
+
+.theme-button {
+    font-size: 11px !important;
+}
+
+.workspace-title h2 {
+    font-size: 26px !important;
+}
+
+.workspace-title p,
+.workspace-status {
+    font-size: 11px !important;
+}
+
+.panel-title {
+    font-size: 13px !important;
+    font-weight: 800 !important;
+}
+
+.command-button {
+    font-size: 12px !important;
+}
+
+.telemetry-item span {
+    font-size: 10px !important;
+}
+
+.telemetry-item strong {
+    font-size: 20px !important;
+}
+
+.compute-connectivity-title {
+    font-size: 10px !important;
+}
+
+.compute-status-box span {
+    font-size: 9px !important;
+}
+
+.compute-status-value {
+    font-size: 12px !important;
+}
+
+.log {
+    font-size: 11px !important;
+}
+
+
+/* =========================================================
+   2. SAME COLLAPSED / HOVER SIDEBAR FOR ALL MISSIONS
+   ========================================================= */
+
+.sidebar {
+    width: 45px !important;
+    flex: 0 0 45px !important;
+
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+
+    overflow: hidden !important;
+
+    transition:
+        width .2s ease,
+        flex-basis .2s ease,
+        padding .2s ease !important;
+
+    z-index: 1000 !important;
+}
+
+.sidebar:hover {
+    width: 180px !important;
+    flex-basis: 180px !important;
+
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+.sidebar .nav-button {
+    width: 100% !important;
+    min-width: 0 !important;
+
+    white-space: nowrap !important;
+    overflow: hidden !important;
+
+    font-size: 15px !important;
+}
+
+.sidebar .nav-number {
+    width: 30px !important;
+    min-width: 30px !important;
+
+    flex-shrink: 0 !important;
+
+    font-size: 14px !important;
+}
+
+.sidebar:not(:hover) .sidebar-title {
+    opacity: 0 !important;
+}
+
+.sidebar:hover .sidebar-title {
+    opacity: 1 !important;
+}
+
+
+/* =========================================================
+   3. MAIN CONTENT — VERTICAL SCROLL
+   ========================================================= */
+
+.content {
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    height: 100% !important;
+
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+
+    box-sizing: border-box !important;
+}
+
+.workspace {
+    width: 100% !important;
+
+    min-height: 100% !important;
+    height: auto !important;
+
+    overflow: visible !important;
+
+    box-sizing: border-box !important;
+}
+
+.workspace.active {
+    overflow: visible !important;
+}
+
+
+/* =========================================================
+   4. GCS — CAMERA FIRST
+   ========================================================= */
+
+#gcsWorkspace {
+    height: auto !important;
+    min-height: 100% !important;
+
+    overflow: visible !important;
+}
+
+#gcsWorkspace .gcs-layout {
+    width: 100% !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    height: auto !important;
+    min-height: 0 !important;
+
+    gap: 12px !important;
+}
+
+#gcsWorkspace .camera-panel {
+    width: 100% !important;
+
+    height: calc(100vh - 150px) !important;
+    min-height: 520px !important;
+
+    flex: 0 0 auto !important;
+}
+
+#gcsWorkspace .camera-grid {
+    width: 100% !important;
+
+    height: calc(100% - 40px) !important;
+
+    display: grid !important;
+
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 1fr 1fr !important;
+
+    gap: 6px !important;
+    padding: 6px !important;
+}
+
+#gcsWorkspace .camera-box {
+    position: relative !important;
+
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    overflow: hidden !important;
+}
+
+#gcsWorkspace .camera-box video {
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: contain !important;
+
+    background: #000 !important;
+}
+
+#gcsWorkspace .camera-label {
+    font-size: 17px !important;
+    font-weight: 800 !important;
+}
+
+#gcsWorkspace .camera-status {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+}
+
+#gcsWorkspace .camera-performance {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+}
+
+
+/* =========================================================
+   5. GCS TILE ARROWS
+   ========================================================= */
+
+#gcsWorkspace .camera-tile-arrow {
+    position: absolute !important;
+
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+
+    z-index: 100 !important;
+
+    width: 44px !important;
+    height: 44px !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    border: 1px solid #777 !important;
+    border-radius: 4px !important;
+
+    background: rgba(0, 0, 0, .82) !important;
+
+    color: #fff !important;
+
+    font-size: 28px !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+
+    cursor: pointer !important;
+}
+
+#gcsWorkspace .camera-tile-arrow-left {
+    left: 12px !important;
+}
+
+#gcsWorkspace .camera-tile-arrow-right {
+    right: 12px !important;
+}
+
+#gcsWorkspace .camera-tile-arrow:hover {
+    background: rgba(35, 35, 35, .96) !important;
+    border-color: #aaa !important;
+
+    transform: translateY(-50%) !important;
+}
+
+
+/* =========================================================
+   6. GCS DATA BELOW CAMERAS
+   ========================================================= */
+
+#gcsWorkspace .gcs-right-stack {
+    width: 100% !important;
+
+    display: grid !important;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr) !important;
+
+    gap: 12px !important;
+
+    flex: 0 0 auto !important;
+}
+
+#gcsWorkspace .telemetry-panel,
+#gcsWorkspace .compute-connectivity {
+    min-height: 210px !important;
+}
+
+#gcsWorkspace .gcs-bottom {
+    min-height: 140px !important;
+    height: auto !important;
+}
+
+
+/* =========================================================
+   7. FULLSCREEN CAMERA ARROWS
+   ========================================================= */
+
+#cameraFullscreen .fullscreen-arrow {
+    width: 48px !important;
+    height: 48px !important;
+
+    border-radius: 4px !important;
+
+    font-size: 30px !important;
+}
+
+#cameraFullscreen .fullscreen-arrow.left {
+    left: 18px !important;
+    right: auto !important;
+}
+
+#cameraFullscreen .fullscreen-arrow.right {
+    right: 18px !important;
+    left: auto !important;
+}
+
+
+/* =========================================================
+   8. ABEX — CONTROLS ONLY IN ABEX
+   A B C D E + PANORAMA
+   ========================================================= */
+
+/*
+   The controls are inside #abexWorkspace in the actual HTML.
+   Therefore they can be positioned relative to ABEX only.
+*/
+
+#abexWorkspace {
+    position: relative !important;
+
+    height: auto !important;
+    min-height: 100% !important;
+
+    overflow: visible !important;
+}
+
+
+/* Remove their old grid placement */
+#abexWorkspace .abex-controls-space {
+    position: absolute !important;
+
+    top: 0 !important;
+    right: 12px !important;
+
+    z-index: 500 !important;
+
+    width: auto !important;
+    height: 52px !important;
+    min-height: 52px !important;
+
+    padding: 5px 8px !important;
+    margin: 0 !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: flex-end !important;
+
+    box-sizing: border-box !important;
+
+    background: transparent !important;
+
+    border: 0 !important;
+}
+
+
+/* A B C D E + Panorama row */
+
+#abexWorkspace .abex-controls-space .abex-controls {
+    width: auto !important;
+    height: 100% !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: flex-end !important;
+
+    gap: 8px !important;
+
+    padding: 5px 8px !important;
+    margin: 0 !important;
+
+    background: var(--panel) !important;
+
+    border: 1px solid var(--border) !important;
+    border-radius: 7px !important;
+
+    box-sizing: border-box !important;
+}
+
+
+/* A B C D E */
+
+#abexWorkspace .abex-controls-space .test-buttons {
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    gap: 7px !important;
+
+    margin: 0 !important;
+}
+
+
+/* Panorama */
+
+#abexWorkspace .abex-controls-space .abex-action-group {
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin-left: 12px !important;
+}
+
+
+/* A B C D E buttons */
+
+#abexWorkspace .abex-controls-space .test-button {
+    width: 48px !important;
+    min-width: 48px !important;
+
+    height: 40px !important;
+
+    padding: 0 !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    font-size: 15px !important;
+    font-weight: 800 !important;
+}
+
+
+/* Panorama */
+
+#abexWorkspace .abex-controls-space .command-button {
+    min-width: 120px !important;
+
+    height: 40px !important;
+
+    padding: 0 16px !important;
+
+    font-size: 15px !important;
+    font-weight: 800 !important;
+}
+
+
+/* Keep ABEX content below the top control strip */
+#abexWorkspace .abex-layout {
+    position: relative !important;
+
+    height: auto !important;
+    min-height: 0 !important;
+
+    overflow: visible !important;
+}
+
+
+/* ABEX camera text */
+
+#abexWorkspace .camera-label,
+#abexWorkspace .abex-camera-label {
+    font-size: 17px !important;
+    font-weight: 800 !important;
+}
+
+#abexWorkspace .camera-status,
+#abexWorkspace .abex-camera-status {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+}
+
+#abexWorkspace .abex-camera-performance {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+}
+
+
+/* ABEX lower information remains scrollable */
+
+#abexWorkspace .abex-environment,
+#abexWorkspace .abex-sensor-info,
+#abexWorkspace .abex-sensor-info-grid,
+#abexWorkspace .abex-spectrum-panel,
+#abexWorkspace .abex-data-panel {
+    overflow: visible !important;
+}
+
+
+/* =========================================================
+   9. RADO — CAMERA FIRST / DATA BELOW
+   ========================================================= */
+
+#radoWorkspace {
+    height: auto !important;
+    min-height: 100% !important;
+
+    overflow: visible !important;
+}
+
+#radoWorkspace .rado-mode-view,
+#radoWorkspace .rado-recon-view,
+#radoWorkspace .rado-autonomous-view {
+    overflow: visible !important;
+
+    min-height: 0 !important;
+}
+
+#radoWorkspace .rado-recon-cameras-panel {
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    overflow: hidden !important;
+}
+
+#radoWorkspace .rado-recon-camera-grid {
+    min-height: 0 !important;
+
+    overflow: hidden !important;
+}
+
+#radoWorkspace .rado-mode-tab {
+    font-size: 13px !important;
+    font-weight: 800 !important;
+}
+
+
+/* =========================================================
+   10. IDMO — CAMERA FIRST / DATA BELOW
+   ========================================================= */
+
+#idmoWorkspace {
+    height: auto !important;
+    min-height: 100% !important;
+
+    overflow: visible !important;
+}
+
+#idmoWorkspace .idmo-layout,
+#idmoWorkspace .idmo-content,
+#idmoWorkspace .idmo-data,
+#idmoWorkspace .idmo-panels,
+#idmoWorkspace .idmo-top-grid {
+    min-height: 0 !important;
+
+    overflow: visible !important;
+}
+
+#idmoWorkspace .idmo-camera-panel,
+#idmoWorkspace .idmo-arm-status {
+    min-height: 0 !important;
+}
+
+#idmoWorkspace .idmo-camera-placeholder {
+    font-size: 17px !important;
+    font-weight: 800 !important;
+}
+
+
+/* =========================================================
+   11. ALL MISSION DATA TEXT
+   ========================================================= */
+
+#abexWorkspace,
+#radoWorkspace,
+#idmoWorkspace {
+
+    --gui-label-size: 14px;
+    --gui-value-size: 17px;
+}
+
+#abexWorkspace .panel-title,
+#radoWorkspace .panel-title,
+#idmoWorkspace .panel-title {
+    font-size: 14px !important;
+    font-weight: 800 !important;
+}
+
+
+/* =========================================================
+   12. SCROLLBAR
+   ========================================================= */
+
+.content::-webkit-scrollbar {
+    width: 12px;
+}
+
+.content::-webkit-scrollbar-track {
+    background: #080808;
+}
+
+.content::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 6px;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}
+
+.content {
+    scrollbar-width: auto;
+}
+
+
+/* =========================================================
+   13. RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    #gcsWorkspace .gcs-right-stack {
+        grid-template-columns: 1fr !important;
+    }
+
+    #gcsWorkspace .camera-panel {
+        min-height: 520px !important;
+    }
+
+    #gcsWorkspace .camera-grid {
+        min-height: 480px !important;
+    }
+}
+
+@media (max-width: 700px) {
+
+    #abexWorkspace .abex-controls-space {
+        right: 5px !important;
+
+        height: auto !important;
+        min-height: 52px !important;
+    }
+
+    #abexWorkspace .abex-controls-space .abex-controls {
+        flex-wrap: wrap !important;
+
+        height: auto !important;
+
+        gap: 5px !important;
+    }
+
+    #abexWorkspace .abex-controls-space .abex-action-group {
+        margin-left: 4px !important;
+    }
+}
+
+
+/* ============================================================
+   ABEX ONLY — EXACT HAND-DRAWN LAYOUT
+   ------------------------------------------------------------
+   DO NOT MODIFY GCS / RADO / IDMO.
+   Layout:
+       ┌───────────────────┬───────────────────┐
+       │    DRILL CAMERA   │    TEST CAMERA    │
+       ├───────────────────┼───────────────────┤
+       │ ENVIRONMENT DATA  │ MICROSCOPIC CAMERA │
+       ├───────────────────────────────────────┤
+       │            SPECTROMETER              │
+       │              GRAPH                   │
+       └───────────────────────────────────────┘
+   The normal content scrollbar is used on the right.
+   ============================================================ */
+
+#abexWorkspace {
+    position: relative !important;
+    height: auto !important;
+    min-height: 100% !important;
+    overflow: visible !important;
+    flex: none !important;
+}
+
+/* Camera-first ABEX grid */
+#abexWorkspace .abex-layout {
+    width: 100% !important;
+
+    display: grid !important;
+    flex: none !important;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr) !important;
+
+    /* Large cameras, smaller lower data, then graph */
+    grid-template-rows:
+        minmax(560px, 60vh)
+        minmax(280px, 30vh)
+        minmax(420px, 45vh) !important;
+
+    gap: 10px !important;
+
+    height: auto !important;
+    min-height: 0 !important;
+
+    overflow: visible !important;
+    align-content: start !important;
+}
+
+/* ------------------------------------------------------------
+   ROW 1 — DRILL CAMERA / TEST CAMERA
+   ------------------------------------------------------------ */
+
+#abexWorkspace .abex-layout > .abex-panel:nth-child(1) {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+#abexWorkspace .abex-layout > .abex-panel:nth-child(3) {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* ------------------------------------------------------------
+   ROW 2 — ENVIRONMENT / MICROSCOPIC CAMERA
+   ------------------------------------------------------------ */
+
+#abexWorkspace .abex-layout > .abex-environment {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    height: auto !important;
+    overflow: hidden !important;
+}
+
+#abexWorkspace .abex-layout > .abex-microscope {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* ------------------------------------------------------------
+   CAMERA VIEWS — FILL THEIR ENTIRE BOX
+   ------------------------------------------------------------ */
+
+#abexWorkspace .abex-panel .single-video {
+    position: relative !important;
+
+    width: 100% !important;
+    height: calc(100% - 40px) !important;
+
+    min-height: 0 !important;
+    flex: 1 1 auto !important;
+
+    overflow: hidden !important;
+    background: #000 !important;
+}
+
+#abexWorkspace .abex-panel .single-video video {
+    width: 100% !important;
+    height: 100% !important;
+
+    display: block !important;
+
+    object-fit: contain !important;
+    background: #000 !important;
+}
+
+/* Keep camera labels/metrics visible */
+#abexWorkspace .video-empty {
+    position: absolute !important;
+    inset: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    pointer-events: none !important;
+}
+
+#abexWorkspace .abex-camera-performance {
+    right: 10px !important;
+    bottom: 10px !important;
+
+    font-size: 15px !important;
+    font-weight: 700 !important;
+}
+
+/* ------------------------------------------------------------
+   ENVIRONMENT DATA — COMPACT SECOND ROW
+   ------------------------------------------------------------ */
+
+#abexWorkspace .abex-environment-grid {
+    width: 100% !important;
+    height: calc(100% - 40px) !important;
+
+    display: grid !important;
+
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: repeat(4, minmax(0, 1fr)) !important;
+
+    gap: 7px !important;
+    padding: 9px !important;
+
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+}
+
+#abexWorkspace .abex-environment-item {
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    padding: 8px 12px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+#abexWorkspace .abex-environment-item span {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
+#abexWorkspace .abex-environment-item strong {
+    font-size: 17px !important;
+    font-weight: 800 !important;
+}
+
+/* ------------------------------------------------------------
+   ROW 3 — SPECTROMETER FULL WIDTH
+   ------------------------------------------------------------ */
+
+#abexWorkspace .abex-layout > .abex-panel:nth-child(5) {
+    grid-column: 1 / -1 !important;
+    grid-row: 3 !important;
+
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+#abexWorkspace .abex-layout > .abex-panel:nth-child(5) .spectrum {
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    height: calc(100% - 40px) !important;
+}
+
+/* ------------------------------------------------------------
+   A/B/C/D/E + PANORAMA — ABEX ONLY, TOP RIGHT
+   ------------------------------------------------------------ */
+
+#abexWorkspace .abex-controls-space {
+    position: absolute !important;
+
+    top: 0 !important;
+    right: 0 !important;
+
+    z-index: 100 !important;
+
+    width: auto !important;
+    height: 55px !important;
+    min-height: 55px !important;
+
+    padding: 5px !important;
+    margin: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+
+    background: transparent !important;
+    border: 0 !important;
+}
+
+#abexWorkspace .abex-controls-space .abex-controls {
+    width: auto !important;
+    height: 45px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+
+    gap: 7px !important;
+
+    padding: 4px 7px !important;
+    margin: 0 !important;
+
+    background: var(--panel) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 6px !important;
+}
+
+#abexWorkspace .abex-controls-space .test-buttons,
+#abexWorkspace .abex-controls-space .abex-action-group {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    margin: 0 !important;
+}
+
+#abexWorkspace .abex-controls-space .test-button {
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 34px !important;
+
+    padding: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    font-size: 14px !important;
+    font-weight: 800 !important;
+}
+
+#abexWorkspace .abex-controls-space .command-button {
+    min-width: 105px !important;
+    height: 34px !important;
+
+    padding: 0 12px !important;
+
+    font-size: 14px !important;
+    font-weight: 800 !important;
+}
+
+/* ------------------------------------------------------------
+   IMPORTANT — NO INNER ABEX SCROLL BOX
+   The existing .content scrollbar handles the whole ABEX page.
+   ------------------------------------------------------------ */
+
+#abexWorkspace .abex-layout,
+#abexWorkspace .abex-panel,
+#abexWorkspace .abex-microscope,
+#abexWorkspace .abex-environment {
+    overflow: visible !important;
+}
+
+#abexWorkspace .abex-panel .single-video,
+#abexWorkspace .abex-environment-grid {
+    overflow: hidden !important;
+}
+
+/* Make the ABEX page tall enough to naturally scroll down */
+#abexWorkspace.active {
+    height: auto !important;
+    min-height: 100% !important;
+    overflow: visible !important;
+}
+
+/* ------------------------------------------------------------
+   SMALL SCREEN — SAME STRUCTURE, ONE COLUMN
+   ------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+
+    #abexWorkspace .abex-layout {
+        grid-template-columns: 1fr !important;
+
+        grid-template-rows:
+            minmax(480px, 60vh)
+            minmax(480px, 60vh)
+            minmax(280px, 35vh)
+            minmax(480px, 60vh)
+            minmax(400px, 45vh) !important;
+    }
+
+    #abexWorkspace .abex-layout > .abex-panel:nth-child(1) {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+    }
+
+    #abexWorkspace .abex-layout > .abex-panel:nth-child(3) {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+    }
+
+    #abexWorkspace .abex-layout > .abex-environment {
+        grid-column: 1 !important;
+        grid-row: 3 !important;
+    }
+
+    #abexWorkspace .abex-layout > .abex-microscope {
+        grid-column: 1 !important;
+        grid-row: 4 !important;
+    }
+
+    #abexWorkspace .abex-layout > .abex-panel:nth-child(5) {
+        grid-column: 1 !important;
+        grid-row: 5 !important;
+    }
+}
+
+/* =========================================================
+   ABEX-ONLY FINAL LAYOUT + HEADER CONTROLS
+   GCS / RADO / IDMO ARE NOT MODIFIED BY THIS PATCH
+   ========================================================= */
+
+/* ABEX header: title left, A-E + PANORAMA right */
+#abexWorkspace .abex-header {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+}
+
+#abexWorkspace .abex-header-controls {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 6px !important;
+    margin-left: auto !important;
+    flex-shrink: 0 !important;
+}
+
+#abexWorkspace .abex-header-controls .test-button {
+    width: 42px !important;
+    min-width: 42px !important;
+    height: 34px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+}
+
+#abexWorkspace .abex-header-controls .command-button {
+    height: 34px !important;
+    min-width: 105px !important;
+    padding: 0 12px !important;
+    margin: 0 0 0 5px !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+}
+
+/* Exact ABEX drawing:
+   row 1 = Drill | Test
+   row 2 = Environment | Microscopic
+   row 3 = Spectrometer full width
+   row 4 = remaining ABEX data, below the visible cameras
+*/
+#abexWorkspace .abex-layout {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    grid-template-rows:
+        minmax(430px, 62vh)
+        minmax(280px, 38vh)
+        minmax(360px, 45vh)
+        auto !important;
+    gap: 10px !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+}
+
+/* Drill */
+#abexWorkspace .abex-layout > .abex-panel:nth-child(1) {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    min-height: 0 !important;
+}
+
+/* Environment */
+#abexWorkspace .abex-layout > .abex-environment {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+}
+
+/* Test */
+#abexWorkspace .abex-layout > .abex-panel:nth-child(3) {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    min-height: 0 !important;
+}
+
+/* Microscopic */
+#abexWorkspace .abex-layout > .abex-microscope {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    min-height: 0 !important;
+}
+
+/* Spectrometer */
+#abexWorkspace .abex-layout > .abex-panel:nth-child(5) {
+    grid-column: 1 / -1 !important;
+    grid-row: 3 !important;
+    min-height: 0 !important;
+}
+
+/* Large ABEX camera feeds */
+#abexWorkspace .single-video {
+    width: 100% !important;
+    height: calc(100% - 40px) !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    background: #000 !important;
+}
+
+#abexWorkspace .single-video video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+}
+
+/* No ABEX nested scrollbars */
+#abexWorkspace,
+#abexWorkspace .abex-layout {
+    overflow: visible !important;
+}
+
+/* Main content remains the only page scroll container */
+.content {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+@media (max-width: 900px) {
+    #abexWorkspace .abex-header-controls {
+        gap: 4px !important;
+    }
+
+    #abexWorkspace .abex-header-controls .test-button {
+        width: 36px !important;
+        min-width: 36px !important;
+        height: 32px !important;
+    }
+
+    #abexWorkspace .abex-header-controls .command-button {
+        min-width: 90px !important;
+        padding: 0 8px !important;
+    }
+
+    #abexWorkspace .abex-layout {
+        grid-template-columns: 1fr !important;
+        grid-template-rows:
+            minmax(400px, 55vh)
+            minmax(400px, 55vh)
+            minmax(260px, auto)
+            minmax(400px, 50vh) !important;
+    }
+
+    #abexWorkspace .abex-layout > .abex-panel:nth-child(1) {
+        grid-column: 1 !important; grid-row: 1 !important;
+    }
+    #abexWorkspace .abex-layout > .abex-panel:nth-child(3) {
+        grid-column: 1 !important; grid-row: 2 !important;
+    }
+    #abexWorkspace .abex-layout > .abex-environment {
+        grid-column: 1 !important; grid-row: 3 !important;
+    }
+    #abexWorkspace .abex-layout > .abex-microscope {
+        grid-column: 1 !important; grid-row: 3 !important;
+    }
+    #abexWorkspace .abex-layout > .abex-panel:nth-child(5) {
+        grid-column: 1 !important; grid-row: 4 !important;
+    }
+}
+
+/* =========================================================
+   RADO ONLY — LARGE RECONNAISSANCE CAMERA LAYOUT
+   GCS / ABEX / IDMO are intentionally untouched.
+   Autonomous RADO mode is intentionally untouched.
+   ========================================================= */
+
+#radoWorkspace #radoReconView {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+}
+
+/* RADO reconnaissance: camera block gets the main space */
+#radoWorkspace #radoReconView .rado-layout {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+
+    overflow: visible !important;
+}
+
+/* Large 2 x 2 camera area */
+#radoWorkspace #radoReconView .rado-recon-cameras-panel {
+    order: 1 !important;
+
+    width: 100% !important;
+    height: calc(100vh - 170px) !important;
+    min-height: 620px !important;
+
+    flex: 0 0 auto !important;
+    overflow: hidden !important;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-grid {
+    width: 100% !important;
+    height: calc(100% - 40px) !important;
+
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 1fr 1fr !important;
+
+    gap: 8px !important;
+    padding: 8px !important;
+
+    min-height: 0 !important;
+    box-sizing: border-box !important;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-card {
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    overflow: hidden !important;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-name {
+    flex: 0 0 38px !important;
+    height: 38px !important;
+
+    padding: 0 14px !important;
+
+    font-size: 13px !important;
+    font-weight: 800 !important;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-feed {
+    flex: 1 1 auto !important;
+
+    width: 100% !important;
+    min-height: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    overflow: hidden !important;
+    background: #000 !important;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-feed video {
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: contain !important;
+    background: #000 !important;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-placeholder {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+}
+
+#radoWorkspace #radoReconView .recon-camera-metrics {
+    right: 10px !important;
+    bottom: 10px !important;
+
+    padding: 8px 10px !important;
+
+    font-size: 12px !important;
+    font-weight: 700 !important;
+}
+
+/* Map goes below the large camera block */
+#radoWorkspace #radoReconView .rado-layout > .rado-map {
+    order: 2 !important;
+
+    width: 100% !important;
+    height: 360px !important;
+    min-height: 360px !important;
+
+    flex: 0 0 auto !important;
+}
+
+/* RADO data/controls follow the map */
+#radoWorkspace #radoReconView .rado-layout > .rado-controls {
+    order: 3 !important;
+
+    width: 100% !important;
+    height: auto !important;
+    min-height: 200px !important;
+
+    flex: 0 0 auto !important;
+
+    overflow: visible !important;
+}
+
+/* Only the main page scrolls */
+#radoWorkspace #radoReconView,
+#radoWorkspace #radoReconView .rado-layout {
+    overflow: visible !important;
+}
+
+/* Smaller screens */
+@media (max-width: 900px) {
+
+    #radoWorkspace #radoReconView .rado-recon-cameras-panel {
+        height: auto !important;
+        min-height: 0 !important;
+    }
+
+    #radoWorkspace #radoReconView .rado-recon-camera-grid {
+        height: auto !important;
+
+        grid-template-columns: 1fr !important;
+        grid-template-rows: repeat(4, minmax(360px, 1fr)) !important;
+    }
+
+    #radoWorkspace #radoReconView .rado-recon-camera-card {
+        min-height: 360px !important;
+    }
+
+    #radoWorkspace #radoReconView .rado-layout > .rado-map {
+        height: 320px !important;
+        min-height: 320px !important;
+    }
+}
+
+/* ============================================================
+   FINAL CAMERA-FIRST MISSION LAYOUT
+   GCS / ABEX / RADO / IDMO
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   GLOBAL CONTENT / WORKSPACE
+   ------------------------------------------------------------ */
+
+.content {
+    padding: 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    box-sizing: border-box !important;
+}
+
+.workspace {
+    width: 100% !important;
+    min-height: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Remove large workspace titles.  The top bar already contains the
+   rover identity and the sidebar identifies the active workspace. */
+#gcsWorkspace > .workspace-header,
+#abexWorkspace > .workspace-header,
+#radoWorkspace > .workspace-header,
+#idmoWorkspace > .idmo-header {
+    display: none !important;
+}
+
+/* ------------------------------------------------------------
+   GCS — CAMERA VIEWPORT FIRST
+   ------------------------------------------------------------ */
+
+#gcsWorkspace .gcs-layout {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#gcsWorkspace .camera-panel {
+    width: 100% !important;
+    height: calc(100vh - 62px) !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-sizing: border-box !important;
+}
+
+#gcsWorkspace .camera-panel > .panel-title {
+    display: none !important;
+}
+
+#gcsWorkspace .camera-grid {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 1fr 1fr !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #000 !important;
+}
+
+#gcsWorkspace .camera-box {
+    position: relative !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 1px solid #292929 !important;
+    border-radius: 0 !important;
+    background: #000 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+/* One thin divider, never a wide gap. */
+#gcsWorkspace .camera-box:nth-child(odd) {
+    border-right: 0 !important;
+}
+
+#gcsWorkspace .camera-box:nth-child(-n + 2) {
+    border-bottom: 0 !important;
+}
+
+#gcsWorkspace .camera-box video {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    background: #000 !important;
+}
+
+#gcsWorkspace .camera-label,
+#gcsWorkspace .camera-status {
+    z-index: 30 !important;
+    font-size: 16px !important;
+    font-weight: 800 !important;
+}
+
+#gcsWorkspace .camera-label {
+    top: 20px !important;
+    left: 22px !important;
+}
+
+#gcsWorkspace .camera-status {
+    top: 20px !important;
+    right: 22px !important;
+}
+
+#gcsWorkspace .camera-placeholder {
+    z-index: 5 !important;
+    pointer-events: none !important;
+    font-size: 12px !important;
+}
+
+#gcsWorkspace .camera-performance {
+    position: absolute !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    z-index: 40 !important;
+    padding: 8px 12px !important;
+    background: rgba(0,0,0,.82) !important;
+    border: 1px solid #292929 !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    white-space: nowrap !important;
+}
+
+#gcsWorkspace .camera-tile-arrow {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 50 !important;
+    width: 55px !important;
+    height: 55px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    border: 1px solid #666 !important;
+    border-radius: 5px !important;
+    background: rgba(0,0,0,.82) !important;
+    color: #fff !important;
+    font-size: 30px !important;
+    cursor: pointer !important;
+}
+
+#gcsWorkspace .camera-tile-arrow-left {
+    left: 15px !important;
+    right: auto !important;
+}
+
+#gcsWorkspace .camera-tile-arrow-right {
+    right: 15px !important;
+    left: auto !important;
+}
+
+/* GCS telemetry is intentionally BELOW the first camera viewport. */
+#gcsWorkspace .gcs-right-stack {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 12px !important;
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+}
+
+#gcsWorkspace .gcs-bottom {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 12px 12px !important;
+    box-sizing: border-box !important;
+}
+
+/* ------------------------------------------------------------
+   ABEX — THREE CAMERAS FIRST, EVERYTHING ELSE BELOW
+   ------------------------------------------------------------ */
+
+#abexWorkspace .abex-layout {
+    display: grid !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows:
+        calc((100vh - 62px) / 2)
+        calc((100vh - 62px) / 2)
+        auto !important;
+    gap: 0 !important;
+}
+
+/* The environment panel was removed from the HTML. */
+#abexWorkspace .abex-environment {
+    display: none !important;
+}
+
+#abexWorkspace .abex-layout > .abex-panel {
+    position: relative !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+/* First three children are the camera tiles. */
+#abexWorkspace .abex-layout > .abex-panel:nth-child(1),
+#abexWorkspace .abex-layout > .abex-panel:nth-child(2),
+#abexWorkspace .abex-layout > .abex-panel:nth-child(3) {
+    min-height: 0 !important;
+}
+
+#abexWorkspace .abex-layout > .abex-panel:nth-child(1),
+#abexWorkspace .abex-layout > .abex-panel:nth-child(3) {
+    border-right: 0 !important;
+}
+
+/* Spectrometer starts AFTER the two-row camera viewport. */
+#abexWorkspace .abex-layout > .abex-panel:nth-child(4) {
+    grid-column: 1 / -1 !important;
+    grid-row: 3 !important;
+    min-height: 320px !important;
+}
+
+#abexWorkspace .single-video {
+    height: calc(100% - 40px) !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    background: #000 !important;
+}
+
+#abexWorkspace .single-video video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+}
+
+#abexWorkspace .panel-title {
+    font-size: 14px !important;
+    font-weight: 800 !important;
+}
+
+#abexWorkspace .abex-camera-performance {
+    position: absolute !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    z-index: 30 !important;
+    padding: 8px 12px !important;
+    background: rgba(0,0,0,.82) !important;
+    border: 1px solid #292929 !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    white-space: nowrap !important;
+}
+
+/* ABEX A-E + PANORAMA controls are now below the camera/spectrometer area. */
+#abexWorkspace .abex-controls-below {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 12px !important;
+    box-sizing: border-box !important;
+}
+
+#abexWorkspace .abex-header-controls {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    width: 100% !important;
+}
+
+/* ------------------------------------------------------------
+   RADO — FOUR RECON CAMERAS FIRST, MAP BELOW
+   ------------------------------------------------------------ */
+
+#radoWorkspace .rado-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+}
+
+#radoWorkspace .rado-recon-cameras-panel {
+    order: 1 !important;
+    width: 100% !important;
+    height: calc(100vh - 62px) !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-sizing: border-box !important;
+}
+
+#radoWorkspace .rado-recon-cameras-panel > .panel-title {
+    display: none !important;
+}
+
+#radoWorkspace .rado-recon-camera-grid {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 1fr 1fr !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#radoWorkspace .rado-recon-camera-card {
+    position: relative !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 1px solid #292929 !important;
+    border-radius: 0 !important;
+    background: #000 !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+}
+
+#radoWorkspace .rado-recon-camera-card:nth-child(odd) {
+    border-right: 0 !important;
+}
+
+#radoWorkspace .rado-recon-camera-card:nth-child(-n + 2) {
+    border-bottom: 0 !important;
+}
+
+#radoWorkspace .rado-recon-camera-name {
+    position: absolute !important;
+    top: 20px !important;
+    left: 22px !important;
+    z-index: 30 !important;
+    margin: 0 !important;
+    font-size: 16px !important;
+    font-weight: 800 !important;
+}
+
+#radoWorkspace .rado-recon-camera-feed {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    background: #000 !important;
+}
+
+#radoWorkspace .rado-recon-camera-feed video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    background: #000 !important;
+}
+
+#radoWorkspace .recon-camera-metrics {
+    position: absolute !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    z-index: 30 !important;
+    padding: 8px 12px !important;
+    background: rgba(0,0,0,.82) !important;
+    border: 1px solid #292929 !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    white-space: nowrap !important;
+}
+
+#radoWorkspace .rado-map {
+    order: 2 !important;
+    width: 100% !important;
+    min-height: 420px !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+}
+
+#radoWorkspace .rado-controls {
+    order: 3 !important;
+    width: 100% !important;
+}
+
+/* ------------------------------------------------------------
+   IDMO — CAMERAS FIRST, DATA/STATUS BELOW WHEN PRESENT
+   ------------------------------------------------------------ */
+
+#idmoWorkspace .idmo-top-grid {
+    display: grid !important;
+    width: 100% !important;
+    height: calc(100vh - 62px) !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0 !important;
+}
+
+#idmoWorkspace .idmo-camera-panel,
+#idmoWorkspace .idmo-arm-status {
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border: 1px solid #292929 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+#idmoWorkspace .idmo-camera-panel {
+    border-right: 0 !important;
+}
+
+#idmoWorkspace .idmo-camera-view {
+    height: calc(100% - 40px) !important;
+    margin: 0 !important;
+    background: #000 !important;
+}
+
+#idmoWorkspace .idmo-camera-view video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+}
+
+#idmoWorkspace .panel-title {
+    font-size: 14px !important;
+    font-weight: 800 !important;
+}
+
+/* ------------------------------------------------------------
+   AUTONOMOUS — TOP-LEVEL TAB
+   ------------------------------------------------------------ */
+
+#autonomousWorkspace {
+    width: 100% !important;
+    min-height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+#autonomousWorkspace .autonomous-workspace-inner {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 12px !important;
+    box-sizing: border-box !important;
+}
+
+#autonomousWorkspace .rado-auto-dashboard {
+    width: 100% !important;
+}
+
+/* ------------------------------------------------------------
+   MOBILE
+   ------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+
+    #gcsWorkspace .camera-grid,
+    #abexWorkspace .abex-layout,
+    #radoWorkspace .rado-recon-camera-grid,
+    #idmoWorkspace .idmo-top-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    #gcsWorkspace .camera-box:nth-child(odd),
+    #radoWorkspace .rado-recon-camera-card:nth-child(odd),
+    #abexWorkspace .abex-layout > .abex-panel:nth-child(odd),
+    #idmoWorkspace .idmo-camera-panel {
+        border-right: 1px solid #292929 !important;
+    }
+}
+
+/* ============================================================
+   FINAL ROVER MISSION LAYOUT — 25 AUG 2026
+   ============================================================ */
+
+/* ---------- TOP BAR: controls only, no brand/header space ---------- */
+.topbar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    z-index: 3000 !important;
+    pointer-events: none !important;
+}
+
+.topbar .brand {
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    position: absolute !important;
+    left: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 3001 !important;
+}
+
+.topbar .qbotix-logo {
+    display: block !important;
+    width: min(260px, 28vw) !important;
+    height: auto !important;
+    max-height: 54px !important;
+    object-fit: contain !important;
+    flex-shrink: 0 !important;
+}
+
+.topbar .brand-text {
+    display: block !important;
+}
+
+.topbar .brand-text h1 {
+    color: #ff7a00 !important;
+    font-size: 18px !important;
+    letter-spacing: 1.5px !important;
+    margin: 0 !important;
+}
+
+.topbar .brand-text p {
+    color: #ff7a00 !important;
+    font-size: 10px !important;
+    letter-spacing: 1.3px !important;
+    margin: 3px 0 0 !important;
+}
+
+.topbar .top-status {
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    pointer-events: auto !important;
+}
+
+.stream-toggle {
+    min-height: 42px !important;
+    padding: 10px 18px !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    letter-spacing: .7px !important;
+}
+
+.stream-timer {
+    min-height: 42px !important;
+    padding: 10px 14px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* ---------- MAIN/CAMERA AREA STARTS AT THE VERY TOP ---------- */
+.main {
+    position: relative !important;
+    width: 100% !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.content {
+    width: 100% !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    box-sizing: border-box !important;
+}
+
+.workspace,
+.workspace.active {
+    width: 100% !important;
+    min-height: 100vh !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+}
+
+.workspace-header,
+.workspace-title,
+.idmo-header {
+    display: none !important;
+}
+
+/* ---------- SIDEBAR ---------- */
+.sidebar {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    box-sizing: border-box !important;
+}
+
+/* ---------- GCS: 4 cameras fill first viewport ---------- */
+#gcsWorkspace .gcs-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#gcsWorkspace .camera-panel {
+    width: 100% !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-sizing: border-box !important;
+}
+
+#gcsWorkspace .camera-panel > .panel-title {
+    display: none !important;
+}
+
+#gcsWorkspace .camera-grid {
+    width: 100% !important;
+    height: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 1fr 1fr !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#gcsWorkspace .camera-box {
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border: 1px solid var(--border) !important;
+    box-sizing: border-box !important;
+}
+
+#gcsWorkspace .camera-box:nth-child(odd) {
+    border-right: 0 !important;
+}
+
+#gcsWorkspace .camera-box:nth-child(-n + 2) {
+    border-bottom: 0 !important;
+}
+
+#gcsWorkspace .camera-box video {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    background: #000 !important;
+}
+
+#gcsWorkspace .camera-label,
+#gcsWorkspace .camera-status {
+    z-index: 40 !important;
+    font-size: 16px !important;
+    font-weight: 800 !important;
+}
+
+#gcsWorkspace .camera-performance {
+    right: 12px !important;
+    bottom: 12px !important;
+    z-index: 40 !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+}
+
+#gcsWorkspace .camera-tile-arrow {
+    z-index: 50 !important;
+}
+
+#gcsWorkspace .gcs-right-stack,
+#gcsWorkspace .gcs-bottom {
+    width: 100% !important;
+    flex: none !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+#gcsWorkspace .gcs-right-stack {
+    padding: 12px !important;
+}
+
+#gcsWorkspace .gcs-bottom {
+    padding: 0 12px 12px !important;
+}
+
+/* Raspberry Pi is intentionally removed from the visible GCS data. */
+
+/* ---------- ABEX: drawing layout — drill/test first viewport ---------- */
+#abexWorkspace .abex-layout {
+    display: grid !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 100vh auto !important;
+    gap: 0 !important;
+}
+
+#abexWorkspace .abex-layout > .abex-panel {
+    position: relative !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+/* Drill + Test occupy the complete first viewport. */
+#abexWorkspace .abex-layout > .abex-panel:nth-child(1),
+#abexWorkspace .abex-layout > .abex-panel:nth-child(2) {
+    grid-row: 1 !important;
+    min-height: 100vh !important;
+}
+
+/* Microscope + Spectrometer are below the first viewport. */
+#abexWorkspace .abex-layout > .abex-panel:nth-child(3) {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    min-height: 520px !important;
+}
+
+#abexWorkspace .abex-layout > .abex-panel:nth-child(4) {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    min-height: 520px !important;
+}
+
+#abexWorkspace .abex-layout > .abex-panel:nth-child(1) {
+    border-right: 0 !important;
+}
+
+#abexWorkspace .single-video {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    background: #000 !important;
+}
+
+#abexWorkspace .single-video video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+}
+
+#abexWorkspace .abex-panel > .panel-title {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 30 !important;
+    background: linear-gradient(rgba(0,0,0,.7), transparent) !important;
+}
+
+#abexWorkspace .abex-camera-performance {
+    z-index: 40 !important;
+}
+
+#abexWorkspace .abex-environment {
+    display: none !important;
+}
+
+#abexWorkspace .abex-controls-below {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 12px !important;
+    box-sizing: border-box !important;
+}
+
+/* ---------- RADO: two modes live INSIDE RADO ---------- */
+#radoWorkspace {
+    position: relative !important;
+}
+
+#radoWorkspace .rado-mode-switcher {
+    position: fixed !important;
+    top: 12px !important;
+    right: 12px !important;
+    z-index: 2500 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    width: 32px !important;
+    overflow: hidden !important;
+    transition: width .18s ease !important;
+}
+
+#radoWorkspace .rado-mode-switcher:hover,
+#radoWorkspace .rado-mode-switcher:focus-within {
+    width: 165px !important;
+}
+
+#radoWorkspace .rado-mode-tab {
+    width: 32px !important;
+    min-width: 32px !important;
+    height: 32px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 5px !important;
+    background: rgba(15,15,15,.92) !important;
+    color: var(--muted) !important;
+    font-size: 9px !important;
+    font-weight: 800 !important;
+    letter-spacing: .5px !important;
+    cursor: pointer !important;
+    text-align: left !important;
+    transition: width .18s ease, background .18s ease, color .18s ease !important;
+}
+
+#radoWorkspace .rado-mode-switcher:hover .rado-mode-tab,
+#radoWorkspace .rado-mode-switcher:focus-within .rado-mode-tab {
+    width: 165px !important;
+    min-width: 165px !important;
+    padding: 0 12px !important;
+}
+
+#radoWorkspace .rado-mode-tab.active {
+    border-color: var(--border-light) !important;
+    color: var(--text) !important;
+    background: rgba(25,25,25,.96) !important;
+}
+
+#radoWorkspace .rado-mode-tab span {
+    opacity: 0 !important;
+    transition: opacity .12s ease !important;
+}
+
+#radoWorkspace .rado-mode-switcher:hover .rado-mode-tab span,
+#radoWorkspace .rado-mode-switcher:focus-within .rado-mode-tab span {
+    opacity: 1 !important;
+}
+
+/* Recon first viewport = cameras only. Map follows after scrolling. */
+#radoWorkspace #radoReconView {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#radoWorkspace #radoReconView .rado-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+}
+
+#radoWorkspace #radoReconView .rado-recon-cameras-panel {
+    order: 1 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-sizing: border-box !important;
+}
+
+#radoWorkspace #radoReconView .rado-recon-cameras-panel > .panel-title {
+    display: none !important;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-grid {
+    width: 100% !important;
+    height: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 1fr 1fr !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-card {
+    position: relative !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    border: 1px solid var(--border) !important;
+    background: #000 !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-card:nth-child(odd) {
+    border-right: 0 !important;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-card:nth-child(-n + 2) {
+    border-bottom: 0 !important;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-name {
+    position: absolute !important;
+    top: 20px !important;
+    left: 22px !important;
+    z-index: 30 !important;
+    margin: 0 !important;
+    font-size: 16px !important;
+    font-weight: 800 !important;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-feed {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    background: #000 !important;
+}
+
+#radoWorkspace #radoReconView .rado-recon-camera-feed video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    background: #000 !important;
+}
+
+#radoWorkspace #radoReconView .recon-camera-metrics {
+    position: absolute !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    z-index: 40 !important;
+    padding: 8px 12px !important;
+    background: rgba(0,0,0,.82) !important;
+    border: 1px solid #292929 !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    white-space: nowrap !important;
+}
+
+#radoWorkspace #radoReconView .rado-map {
+    order: 2 !important;
+    width: 100% !important;
+    min-height: 500px !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+}
+
+#radoWorkspace #radoReconView .rado-controls {
+    order: 3 !important;
+    width: 100% !important;
+}
+
+/* ---------- RADO autonomous mode: compact, no giant empty areas ---------- */
+#radoWorkspace #radoAutonomousView {
+    width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 12px !important;
+    box-sizing: border-box !important;
+}
+
+#radoWorkspace #radoAutonomousView .rado-auto-dashboard {
+    display: grid !important;
+    grid-template-columns: 1.4fr 1fr !important;
+    grid-template-rows: auto auto !important;
+    gap: 12px !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+}
+
+#radoWorkspace #radoAutonomousView .rado-auto-main {
+    grid-column: 1 / -1 !important;
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+#radoWorkspace #radoAutonomousView .rado-auto-info-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    min-height: 0 !important;
+}
+
+#radoWorkspace #radoAutonomousView .rado-auto-info-card {
+    min-height: 120px !important;
+    height: auto !important;
+    padding: 12px !important;
+}
+
+#radoWorkspace #radoAutonomousView .rado-auto-gps-panel,
+#radoWorkspace #radoAutonomousView .rado-auto-remote,
+#radoWorkspace #radoAutonomousView .rado-auto-cv {
+    min-height: 260px !important;
+    height: 260px !important;
+    margin: 0 !important;
+}
+
+#radoWorkspace #radoAutonomousView .rado-auto-gps-map,
+#radoWorkspace #radoAutonomousView .rado-auto-remote-screen,
+#radoWorkspace #radoAutonomousView .rado-auto-cv-screen {
+    height: calc(100% - 42px) !important;
+    min-height: 0 !important;
+}
+
+/* ---------- IDMO: cameras first, data below ---------- */
+#idmoWorkspace .idmo-top-grid {
+    width: 100% !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#idmoWorkspace .idmo-camera-panel,
+#idmoWorkspace .idmo-arm-status {
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    box-sizing: border-box !important;
+}
+
+#idmoWorkspace .idmo-camera-panel {
+    border-right: 0 !important;
+}
+
+#idmoWorkspace .idmo-camera-view {
+    height: calc(100% - 42px) !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    background: #000 !important;
+}
+
+#idmoWorkspace .idmo-camera-view video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+    #gcsWorkspace .camera-grid,
+    #radoWorkspace #radoReconView .rado-recon-camera-grid,
+    #idmoWorkspace .idmo-top-grid {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: repeat(4, 100vh) !important;
+    }
+
+    #abexWorkspace .abex-layout {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: 100vh auto auto auto !important;
+    }
+
+    #abexWorkspace .abex-layout > .abex-panel:nth-child(1),
+    #abexWorkspace .abex-layout > .abex-panel:nth-child(2),
+    #abexWorkspace .abex-layout > .abex-panel:nth-child(3),
+    #abexWorkspace .abex-layout > .abex-panel:nth-child(4) {
+        grid-column: 1 !important;
+    }
+
+    #abexWorkspace .abex-layout > .abex-panel:nth-child(1) { grid-row: 1 !important; }
+    #abexWorkspace .abex-layout > .abex-panel:nth-child(2) { grid-row: 2 !important; min-height: 520px !important; }
+    #abexWorkspace .abex-layout > .abex-panel:nth-child(3) { grid-row: 3 !important; }
+    #abexWorkspace .abex-layout > .abex-panel:nth-child(4) { grid-row: 4 !important; }
+
+    #radoWorkspace #radoAutonomousView .rado-auto-info-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    #radoWorkspace #radoAutonomousView .rado-auto-dashboard {
+        grid-template-columns: 1fr !important;
+    }
+
+    #radoWorkspace .rado-mode-switcher {
+        right: 8px !important;
+    }
+}
+
+/* ============================================================
+   FINAL PATCH — RADO MODES + ABEX CONTROL STRIP
+   ============================================================ */
+
+/* There is no separate AUTONOMOUS workspace. */
+#autonomousWorkspace {
+    display: none !important;
+}
+
+/* ------------------------------------------------------------
+   RADO: two small mode blocks INSIDE RADO
+   Keep them clear of the streaming controls.
+   ------------------------------------------------------------ */
+#radoWorkspace .rado-mode-switcher {
+    position: fixed !important;
+    top: 64px !important;
+    right: 165px !important;
+    z-index: 6000 !important;
+    width: 34px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 5px !important;
+    overflow: hidden !important;
+}
+
+#radoWorkspace .rado-mode-switcher:hover,
+#radoWorkspace .rado-mode-switcher:focus-within {
+    width: 180px !important;
+}
+
+#radoWorkspace .rado-mode-tab {
+    width: 34px !important;
+    min-width: 34px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    border: 1px solid #444 !important;
+    border-radius: 5px !important;
+    background: rgba(12,12,12,.96) !important;
+    color: #777 !important;
+    cursor: pointer !important;
+    box-sizing: border-box !important;
+}
+
+#radoWorkspace .rado-mode-switcher:hover .rado-mode-tab,
+#radoWorkspace .rado-mode-switcher:focus-within .rado-mode-tab {
+    width: 180px !important;
+    min-width: 180px !important;
+    padding: 0 12px !important;
+}
+
+#radoWorkspace .rado-mode-tab span {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+#radoWorkspace .rado-mode-switcher:hover .rado-mode-tab span,
+#radoWorkspace .rado-mode-switcher:focus-within .rado-mode-tab span {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+#radoWorkspace .rado-mode-tab.active {
+    color: #fff !important;
+    border-color: #aaa !important;
+    background: rgba(25,25,25,.98) !important;
+}
+
+/* ------------------------------------------------------------
+   RADO autonomous mode: compact dashboard, no giant empty area
+   ------------------------------------------------------------ */
+#radoWorkspace #radoAutonomousView {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+#radoWorkspace #radoAutonomousView .rado-auto-dashboard {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 12px !important;
+    box-sizing: border-box !important;
+}
+
+#radoWorkspace #radoAutonomousView .rado-auto-main {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+}
+
+#radoWorkspace #radoAutonomousView .rado-auto-info-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+}
+
+/* ------------------------------------------------------------
+   IDMO: no autonomous/delivery information in IDMO
+   ------------------------------------------------------------ */
+#idmoWorkspace .rado-auto-dashboard,
+#idmoWorkspace .rado-autonomous-view,
+#idmoWorkspace .autonomous-data,
+#idmoWorkspace [data-mode="autonomous"] {
+    display: none !important;
+}
+
+/* ------------------------------------------------------------
+   ABEX: first viewport = DRILL + TEST only
+   Then A/B/C/D/E + PANORAMA strip
+   Then MICROSCOPIC + SPECTROMETER
+   ------------------------------------------------------------ */
+#abexWorkspace .abex-layout {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 100vh auto 520px !important;
+    gap: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Drill and Test */
+#abexWorkspace .abex-layout > .abex-panel:nth-child(1),
+#abexWorkspace .abex-layout > .abex-panel:nth-child(2) {
+    grid-row: 1 !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+}
+
+#abexWorkspace .abex-layout > .abex-panel:nth-child(1) {
+    grid-column: 1 !important;
+    border-right: 0 !important;
+}
+
+#abexWorkspace .abex-layout > .abex-panel:nth-child(2) {
+    grid-column: 2 !important;
+}
+
+/* Controls are now a real grid row between cameras and lower data. */
+#abexWorkspace .abex-layout > .abex-controls-below {
+    /* Put A/B/C/D/E/PANORAMA directly below TEST CAMERA only. */
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    width: 100% !important;
+    min-height: 64px !important;
+    height: 64px !important;
+    margin: 0 !important;
+    padding: 10px 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    border-top: 1px solid #292929 !important;
+    border-bottom: 1px solid #292929 !important;
+    border-left: 1px solid #292929 !important;
+    background: #0b0b0b !important;
+}
+
+#abexWorkspace .abex-layout > .abex-controls-below .abex-header-controls {
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+}
+
+#abexWorkspace .abex-layout > .abex-controls-below .test-button {
+    width: 42px !important;
+    min-width: 42px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    padding: 0 !important;
+}
+
+#abexWorkspace .abex-layout > .abex-controls-below .command-button {
+    min-width: 110px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    padding: 0 14px !important;
+}
+
+/* Microscope and Spectrometer */
+#abexWorkspace .abex-layout > .abex-panel:nth-child(4) {
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+    min-height: 520px !important;
+    height: 520px !important;
+}
+
+#abexWorkspace .abex-layout > .abex-panel:nth-child(5) {
+    grid-column: 2 !important;
+    grid-row: 3 !important;
+    min-height: 520px !important;
+    height: 520px !important;
+}
+
+/* In case old environment markup survives, never display it. */
+#abexWorkspace .abex-environment {
+    display: none !important;
+}
+
+/* Remove the old controls if an older duplicate exists outside the grid. */
+#abexWorkspace > .abex-controls-below {
+    display: none !important;
+}
+
+/* ------------------------------------------------------------
+   STREAMING BUTTON — slightly larger
+   ------------------------------------------------------------ */
+.stream-toggle {
+    min-width: 170px !important;
+    min-height: 46px !important;
+    padding: 11px 20px !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+}
+
+/* ------------------------------------------------------------
+   Responsive ABEX
+   ------------------------------------------------------------ */
+@media (max-width: 900px) {
+    #abexWorkspace .abex-layout {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: 100vh 520px auto 520px 520px !important;
+    }
+
+    #abexWorkspace .abex-layout > .abex-panel:nth-child(1) {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+    }
+
+    #abexWorkspace .abex-layout > .abex-panel:nth-child(2) {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+        min-height: 520px !important;
+        height: 520px !important;
+    }
+
+    #abexWorkspace .abex-layout > .abex-controls-below {
+        grid-column: 1 !important;
+        grid-row: 3 !important;
+    }
+
+    #abexWorkspace .abex-layout > .abex-panel:nth-child(4) {
+        grid-column: 1 !important;
+        grid-row: 4 !important;
+    }
+
+    #abexWorkspace .abex-layout > .abex-panel:nth-child(5) {
+        grid-column: 1 !important;
+        grid-row: 5 !important;
+    }
+
+    #radoWorkspace .rado-mode-switcher {
+        right: 120px !important;
+    }
+}
+
+
+/* ============================================================
+   FINAL ABEX CONTROL POSITION
+   A / B / C / D / E / PANORAMA live directly below TEST CAMERA
+   ============================================================ */
+#abexWorkspace .abex-layout > .abex-controls-below {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    align-self: stretch !important;
+    justify-self: stretch !important;
+}
+
+#abexWorkspace .abex-layout > .abex-controls-below .abex-header-controls {
+    margin: 0 auto !important;
+}
+
+@media (max-width: 900px) {
+    #abexWorkspace .abex-layout > .abex-controls-below {
+        grid-column: 1 !important;
+        grid-row: 3 !important;
+    }
+}
+
+
+/* ============================================================
+   ABEX-ONLY SENSOR DATA TAB
+   Hidden by default; hover or click expands it.
+   ============================================================ */
+
+#abexWorkspace .abex-sensor-dock {
+    position: fixed !important;
+    top: 50% !important;
+    right: 0 !important;
+    transform: translateY(-50%) !important;
+    z-index: 9999 !important;
+
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+
+    width: 40px !important;
+    max-width: calc(100vw - 12px) !important;
+    height: auto !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    transition: width 0.2s ease !important;
+    pointer-events: auto !important;
+}
+
+/* Expand when the mouse is near it OR when the button is clicked. */
+#abexWorkspace .abex-sensor-dock:hover,
+#abexWorkspace .abex-sensor-dock:focus-within,
+#abexWorkspace .abex-sensor-dock.expanded {
+    width: 350px !important;
+}
+
+/* Small tab visible while collapsed. */
+#abexWorkspace .abex-sensor-tab {
+    flex: 0 0 40px !important;
+
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 150px !important;
+
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 8px 0 !important;
+
+    border: 1px solid var(--border-light, #444) !important;
+    border-right: 0 !important;
+    border-radius: 8px 0 0 8px !important;
+
+    background: var(--panel, #111) !important;
+    color: var(--text, #eee) !important;
+
+    cursor: pointer !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 9px !important;
+
+    box-shadow: 0 8px 28px rgba(0,0,0,.45) !important;
+}
+
+/* Make sure global button styles cannot destroy the tab. */
+#abexWorkspace .abex-sensor-tab:hover {
+    filter: brightness(1.12) !important;
+}
+
+#abexWorkspace .abex-sensor-tab-icon {
+    display: block !important;
+    font-size: 15px !important;
+    line-height: 1 !important;
+}
+
+#abexWorkspace .abex-sensor-tab-label {
+    display: block !important;
+
+    writing-mode: vertical-rl !important;
+    text-orientation: mixed !important;
+    transform: rotate(180deg) !important;
+
+    font-size: 8px !important;
+    font-weight: 800 !important;
+    letter-spacing: 1.2px !important;
+    white-space: nowrap !important;
+}
+
+/* Sensor panel is invisible until hover/click. */
+#abexWorkspace .abex-sensor-panel {
+    flex: 0 0 310px !important;
+
+    width: 310px !important;
+    min-width: 310px !important;
+    max-width: 310px !important;
+
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 12px !important;
+
+    border: 1px solid var(--border-light, #444) !important;
+    border-right: 0 !important;
+    border-radius: 8px 0 0 8px !important;
+
+    background: var(--panel, #111) !important;
+    color: var(--text, #eee) !important;
+
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateX(10px) !important;
+
+    transition:
+        opacity .15s ease,
+        transform .2s ease,
+        visibility .2s ease !important;
+
+    pointer-events: none !important;
+
+    box-shadow: 0 8px 30px rgba(0,0,0,.5) !important;
+}
+
+#abexWorkspace .abex-sensor-dock:hover .abex-sensor-panel,
+#abexWorkspace .abex-sensor-dock:focus-within .abex-sensor-panel,
+#abexWorkspace .abex-sensor-dock.expanded .abex-sensor-panel {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(0) !important;
+    pointer-events: auto !important;
+}
+
+/* Panel header */
+#abexWorkspace .abex-sensor-panel-header {
+    height: 32px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    border-bottom: 1px solid var(--border, #333) !important;
+
+    color: var(--text, #eee) !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    letter-spacing: 1px !important;
+}
+
+#abexWorkspace .abex-sensor-live {
+    color: var(--green, #8fbc8f) !important;
+    font-size: 8px !important;
+}
+
+/* Two-column sensor cards */
+#abexWorkspace .abex-sensor-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 7px !important;
+
+    padding-top: 9px !important;
+}
+
+#abexWorkspace .abex-sensor-item {
+    min-width: 0 !important;
+
+    box-sizing: border-box !important;
+    padding: 9px !important;
+
+    border: 1px solid var(--border, #333) !important;
+    border-radius: 5px !important;
+
+    background: var(--panel2, #151515) !important;
+}
+
+#abexWorkspace .abex-sensor-item span {
+    display: block !important;
+    margin-bottom: 5px !important;
+
+    color: var(--muted, #999) !important;
+
+    font-size: 8px !important;
+    font-weight: 700 !important;
+    letter-spacing: .7px !important;
+}
+
+#abexWorkspace .abex-sensor-item strong {
+    display: block !important;
+
+    color: var(--text, #eee) !important;
+
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    white-space: nowrap !important;
+}
+
+/* On small screens the panel becomes narrower. */
+@media (max-width: 700px) {
+    #abexWorkspace .abex-sensor-dock {
+        width: 36px !important;
+    }
+
+    #abexWorkspace .abex-sensor-dock:hover,
+    #abexWorkspace .abex-sensor-dock:focus-within,
+    #abexWorkspace .abex-sensor-dock.expanded {
+        width: min(300px, calc(100vw - 8px)) !important;
+    }
+
+    #abexWorkspace .abex-sensor-tab {
+        flex-basis: 36px !important;
+        width: 36px !important;
+        min-width: 36px !important;
+    }
+
+    #abexWorkspace .abex-sensor-panel {
+        flex-basis: calc(min(264px, 100vw - 44px)) !important;
+        width: calc(min(264px, 100vw - 44px)) !important;
+        min-width: 0 !important;
+        max-width: none !important;
+    }
+
+    #abexWorkspace .abex-sensor-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+
+/* =========================================================
+   PANORAMA — RIGHT EDGE SLIDING TAB
+   Added without changing existing layouts.
+   ========================================================= */
+.panorama-dock {
+    position: fixed !important;
+    top: 50% !important;
+    right: 0 !important;
+    transform: translateY(-50%) !important;
+    z-index: 10000 !important;
+
+    display: none !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+
+    width: 40px !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+
+    transition: width .2s ease !important;
+    pointer-events: auto !important;
+}
+
+.panorama-dock.panorama-active {
+    display: flex !important;
+}
+
+.panorama-dock:hover,
+.panorama-dock:focus-within,
+.panorama-dock.expanded {
+    width: 350px !important;
+}
+
+.panorama-tab {
+    flex: 0 0 40px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 150px !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 8px 0 !important;
+
+    border: 1px solid var(--border-light, #444) !important;
+    border-right: 0 !important;
+    border-radius: 8px 0 0 8px !important;
+    background: var(--panel, #111) !important;
+    color: var(--text, #eee) !important;
+    cursor: pointer !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 9px !important;
+    box-shadow: 0 8px 28px rgba(0,0,0,.45) !important;
+}
+
+.panorama-tab:hover {
+    filter: brightness(1.12) !important;
+}
+
+.panorama-tab-icon {
+    display: block !important;
+    font-size: 15px !important;
+    line-height: 1 !important;
+}
+
+.panorama-tab-label {
+    display: block !important;
+    writing-mode: vertical-rl !important;
+    text-orientation: mixed !important;
+    transform: rotate(180deg) !important;
+    font-size: 8px !important;
+    font-weight: 800 !important;
+    letter-spacing: 1.2px !important;
+    white-space: nowrap !important;
+}
+
+.panorama-panel {
+    flex: 0 0 310px !important;
+    width: 310px !important;
+    min-width: 310px !important;
+    max-width: 310px !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 12px !important;
+
+    border: 1px solid var(--border-light, #444) !important;
+    border-right: 0 !important;
+    border-radius: 8px 0 0 8px !important;
+    background: var(--panel, #111) !important;
+    color: var(--text, #eee) !important;
+
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateX(10px) !important;
+    transition: opacity .15s ease, transform .2s ease, visibility .2s ease !important;
+    pointer-events: none !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,.5) !important;
+}
+
+.panorama-dock:hover .panorama-panel,
+.panorama-dock:focus-within .panorama-panel,
+.panorama-dock.expanded .panorama-panel {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(0) !important;
+    pointer-events: auto !important;
+}
+
+.panorama-panel-header {
+    height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    border-bottom: 1px solid var(--border, #333) !important;
+    color: var(--text, #eee) !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    letter-spacing: 1px !important;
+}
+
+.panorama-live {
+    color: var(--green, #8fbc8f) !important;
+    font-size: 8px !important;
+}
+
+.panorama-count {
+    padding-top: 10px !important;
+    color: var(--text, #eee) !important;
+    font-size: 22px !important;
+    font-weight: 900 !important;
+    letter-spacing: 1px !important;
+}
+
+.panorama-hint {
+    margin-top: 6px !important;
+    color: var(--muted, #999) !important;
+    font-size: 8px !important;
+    line-height: 1.5 !important;
+}
+
+.panorama-result-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 20000 !important;
+    display: none !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 30px !important;
+    box-sizing: border-box !important;
+    background: rgba(0,0,0,.82) !important;
+}
+
+.panorama-result-overlay.open {
+    display: flex !important;
+}
+
+.panorama-result-card {
+    width: min(1100px, 92vw) !important;
+    max-height: 90vh !important;
+    padding: 12px !important;
+    box-sizing: border-box !important;
+    border: 1px solid var(--border-light, #444) !important;
+    border-radius: 8px !important;
+    background: var(--panel, #111) !important;
+}
+
+.panorama-result-header {
+    height: 36px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    color: var(--text, #eee) !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    letter-spacing: 1px !important;
+}
+
+.panorama-result-header button {
+    padding: 6px 10px !important;
+    border: 1px solid var(--border-light, #444) !important;
+    border-radius: 4px !important;
+    background: transparent !important;
+    color: var(--text, #eee) !important;
+    cursor: pointer !important;
+}
+
+#panoramaResultImage {
+    display: block !important;
+    width: 100% !important;
+    max-height: calc(90vh - 70px) !important;
+    object-fit: contain !important;
+    background: #000 !important;
+}
+
+
+/* =========================================================
+   PANORAMA FINAL VISIBILITY FIX
+   Only the active workspace gets a Panorama dock.
+   ========================================================= */
+#gcsPanoramaDock:not(.panorama-active),
+#abexPanoramaDock:not(.panorama-active) {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+#gcsPanoramaDock.panorama-active,
+#abexPanoramaDock.panorama-active {
+    display: flex !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+
+/* =========================================================
+   QBOTIX BLACK + ORANGE THEME
+   Applied consistently across all dashboards
+   ========================================================= */
+:root {
+    --bg: #000000;
+    --panel: #0a0a0a;
+    --panel2: #080808;
+    --border: #4a2600;
+    --border-light: #6b3900;
+    --text: #f2f2f2;
+    --muted: #b8b8b8;
+    --dim: #686868;
+    --green: #ff7a00;
+    --red: #ff7a00;
+}
+body, body.light {
+    --bg: #000000;
+    --panel: #0a0a0a;
+    --panel2: #080808;
+    --border: #4a2600;
+    --border-light: #6b3900;
+    --text: #f2f2f2;
+    --muted: #b8b8b8;
+    --dim: #686868;
+    --green: #ff7a00;
+    --red: #ff7a00;
+    background: #000000;
+    color: #f2f2f2;
+}
+.topbar, .sidebar {
+    background: #080808;
+    border-color: #4a2600;
+}
+.brand-mark {
+    background: #ff7a00;
+    color: #000000;
+    border-color: #ff7a00;
+}
+.brand-text h1 {
+    color: #ff7a00;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+.brand-text p, .panel-title, .sidebar-title,
+.nav-number, .camera-label, .camera-status,
+.telemetry-item > span, .compute-connectivity-title,
+.panorama-panel-header, .abex-sensor-panel-header {
+    color: #ff7a00;
+}
+.panel, .compute-connectivity, .compute-status-box,
+.telemetry-item, .camera-box, .panorama-panel,
+.abex-sensor-panel, .rado-auto-info-card {
+    background: #0a0a0a;
+    border-color: #4a2600;
+}
+.nav-button.active, .nav-button:hover {
+    background: #1a0d00;
+    color: #ff7a00;
+    border-color: #ff7a00;
+}
+button, .stream-toggle, .test-button, .theme-button {
+    accent-color: #ff7a00;
+}
+.stream-toggle, .test-button, .theme-button,
+.rado-mode-tab.active, .rado-mode-tab:hover,
+.analysis-button {
+    border-color: #ff7a00;
+}
+.stream-toggle-dot, .connection-dot, .compute-status-dot,
+.panorama-live, .abex-sensor-live {
+    background: #ff7a00;
+    box-shadow: none;
+}
+.camera-box {
+    border-color: #ff7a00;
+    outline-color: #4a2600;
+}
+.camera-label, .camera-status, .camera-performance,
+.recon-camera-metrics, .panel-title {
+    border-color: #4a2600;
+}
+a, .rado-auto-card-title, .rado-auto-data-row strong,
+.telemetry-item strong, .compute-status-value b {
+    color: #ff7a00;
+}
+.brand-text { min-width: 0; }
+
+/* FIX: keep the QBOTIX logo/header fully visible and reserve its space. */
+.topbar {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: 62px !important;
+    min-height: 62px !important;
+    flex: 0 0 62px !important;
+    padding: 0 18px !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    background: #080808 !important;
+    border-bottom: 1px solid #4a2600 !important;
+    z-index: 3000 !important;
+    pointer-events: auto !important;
+    box-sizing: border-box !important;
+}
+.topbar .brand {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    min-width: 0 !important;
+}
+.topbar .qbotix-logo {
+    display: block !important;
+    width: min(210px, 24vw) !important;
+    height: auto !important;
+    max-height: 48px !important;
+    object-fit: contain !important;
+    object-position: left center !important;
+}
+.topbar .brand-text { display: block !important; min-width: 0 !important; }
+.topbar .brand-text h1 { margin: 0 !important; line-height: 1.15 !important; }
+.topbar .brand-text p { margin: 3px 0 0 !important; line-height: 1.2 !important; }
+.topbar .top-status {
+    position: static !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    margin-left: auto !important;
+    min-width: 0 !important;
+}
+.main {
+    height: calc(100vh - 62px) !important;
+    min-height: 0 !important;
+    flex: 1 1 auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.content {
+    height: 100% !important;
+    min-height: 0 !important;
+}
+.workspace, .workspace.active {
+    min-height: 100% !important;
+}
+@media (max-width: 700px) {
+    .topbar { padding: 0 8px !important; }
+    .topbar .qbotix-logo { width: min(145px, 30vw) !important; max-height: 40px !important; }
+    .topbar .brand { gap: 6px !important; }
+    .topbar .brand-text h1 { font-size: 12px !important; }
+    .topbar .brand-text p { font-size: 8px !important; letter-spacing: .6px !important; }
+    .topbar .top-status { gap: 6px !important; }
+    .stream-toggle { padding: 8px !important; font-size: 10px !important; }
+    .stream-timer { display: none !important; }
+}
+
+/* RADO mode selector visibility fix: keep both options readable without hover. */
+#radoWorkspace .rado-mode-switcher {
+    position: relative !important;
+    inset: auto !important;
+    z-index: 50 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 10px !important;
+    width: fit-content !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 46px !important;
+    margin: 0 0 12px 0 !important;
+    padding: 6px !important;
+    overflow: visible !important;
+    background: #080808 !important;
+    border: 1px solid #4a2600 !important;
+    border-radius: 8px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+#radoWorkspace .rado-mode-tab,
+#radoWorkspace .rado-mode-switcher .rado-mode-tab {
+    display: inline-flex !important;
+    position: relative !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: 170px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    padding: 0 18px !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    background: #111111 !important;
+    border: 1px solid #4a2600 !important;
+    border-radius: 5px !important;
+    color: #ff7a00 !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    letter-spacing: .8px !important;
+    line-height: 1 !important;
+    text-align: center !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    cursor: pointer !important;
+}
+#radoWorkspace .rado-mode-tab span,
+#radoWorkspace .rado-mode-switcher .rado-mode-tab span {
+    display: inline !important;
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: none !important;
+    overflow: visible !important;
+    color: inherit !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    white-space: nowrap !important;
+}
+#radoWorkspace .rado-mode-tab.active,
+#radoWorkspace .rado-mode-tab:hover,
+#radoWorkspace .rado-mode-tab:focus-visible {
+    background: #ff7a00 !important;
+    border-color: #ff7a00 !important;
+    color: #000000 !important;
+    outline: none !important;
+}
+@media (max-width: 520px) {
+    #radoWorkspace .rado-mode-switcher { gap: 6px !important; }
+    #radoWorkspace .rado-mode-tab { min-width: 0 !important; padding: 0 10px !important; font-size: 11px !important; }
+}
+
+
+/* FINAL RADO REQUIREMENT: show AUTONOMOUS only; hide reconnaissance UI completely. */
+#radoWorkspace .rado-mode-switcher { display: none !important; }
+#radoWorkspace #radoReconView { display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important; }
+#radoWorkspace #radoAutonomousView { display: block !important; visibility: visible !important; opacity: 1 !important; pointer-events: auto !important; height: auto !important; overflow: visible !important; }

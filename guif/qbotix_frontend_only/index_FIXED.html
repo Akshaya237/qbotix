@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>QBOTIX ROVER | Ground Control Station</title>
+<link href="styles_FIXED.css" rel="stylesheet"/><style>
+
+/* =========================================================
+   QBOTIX BLACK + ORANGE THEME
+   Applied consistently across all dashboards
+   ========================================================= */
+:root {
+    --bg: #000000;
+    --panel: #0a0a0a;
+    --panel2: #080808;
+    --border: #4a2600;
+    --border-light: #6b3900;
+    --text: #f2f2f2;
+    --muted: #b8b8b8;
+    --dim: #686868;
+    --green: #ff7a00;
+    --red: #ff7a00;
+}
+body, body.light {
+    --bg: #000000;
+    --panel: #0a0a0a;
+    --panel2: #080808;
+    --border: #4a2600;
+    --border-light: #6b3900;
+    --text: #f2f2f2;
+    --muted: #b8b8b8;
+    --dim: #686868;
+    --green: #ff7a00;
+    --red: #ff7a00;
+    background: #000000;
+    color: #f2f2f2;
+}
+.topbar, .sidebar {
+    background: #080808;
+    border-color: #4a2600;
+}
+.brand-mark {
+    background: #ff7a00;
+    color: #000000;
+    border-color: #ff7a00;
+}
+.brand-text h1 {
+    color: #ff7a00;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+.brand-text p, .panel-title, .sidebar-title,
+.nav-number, .camera-label, .camera-status,
+.telemetry-item > span, .compute-connectivity-title,
+.panorama-panel-header, .abex-sensor-panel-header {
+    color: #ff7a00;
+}
+.panel, .compute-connectivity, .compute-status-box,
+.telemetry-item, .camera-box, .panorama-panel,
+.abex-sensor-panel, .rado-auto-info-card {
+    background: #0a0a0a;
+    border-color: #4a2600;
+}
+.nav-button.active, .nav-button:hover {
+    background: #1a0d00;
+    color: #ff7a00;
+    border-color: #ff7a00;
+}
+button, .stream-toggle, .test-button, .theme-button {
+    accent-color: #ff7a00;
+}
+.stream-toggle, .test-button, .theme-button,
+.rado-mode-tab.active, .rado-mode-tab:hover,
+.analysis-button {
+    border-color: #ff7a00;
+}
+.stream-toggle-dot, .connection-dot, .compute-status-dot,
+.panorama-live, .abex-sensor-live {
+    background: #ff7a00;
+    box-shadow: none;
+}
+.camera-box {
+    border-color: #ff7a00;
+    outline-color: #4a2600;
+}
+.camera-label, .camera-status, .camera-performance,
+.recon-camera-metrics, .panel-title {
+    border-color: #4a2600;
+}
+a, .rado-auto-card-title, .rado-auto-data-row strong,
+.telemetry-item strong, .compute-status-value b {
+    color: #ff7a00;
+}
+.brand-text { min-width: 0; }
+
+/* IDMO: use the full available dashboard area for the two camera feeds. */
+#idmoWorkspace {
+    min-height: calc(100vh - 96px) !important;
+    height: calc(100vh - 96px) !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    flex: 0 0 auto !important;
+    overflow: hidden !important;
+}
+#idmoWorkspace .idmo-two-camera-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    box-sizing: border-box !important;
+}
+#idmoWorkspace .idmo-camera-panel {
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+#idmoWorkspace .idmo-camera-view {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    position: relative !important;
+    margin: 0 !important;
+    background: #000 !important;
+    overflow: hidden !important;
+}
+#idmoWorkspace .idmo-camera-view video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+}
+/* User requested no light/dark control anywhere in the sidebar. */
+.sidebar-bottom, .sidebar .theme-button { display: none !important; }
+@media (max-width: 700px) {
+    #idmoWorkspace { height: calc(100vh - 96px) !important; }
+    #idmoWorkspace .idmo-two-camera-grid {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: 1fr 1fr !important;
+    }
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+
+<header class="topbar">
+<div class="brand">
+<img class="qbotix-logo" src="logo.jpg" alt="QBOTIX logo" />
+<div class="brand-text">
+<p>GROUND CONTROL STATION</p>
+</div>
+</div>
+<div class="top-status">
+<div class="stream-control">
+<button class="stream-toggle" id="streamToggle" onclick="toggleStreaming()">
+<span class="stream-toggle-dot" id="streamToggleDot">
+</span>
+<span id="streamToggleText">
+                    START STREAMING
+                </span>
+</button>
+<div class="stream-timer" id="streamTimer">
+
+                00:00:00
+
+            </div>
+</div>
+<div class="connection">
+<div class="connection-dot offline" id="connectionDot">
+</div>
+<span id="connectionText">
+                OFFLINE
+            </span>
+</div>
+</div>
+</header>
+
+<main class="main">
+
+<aside class="sidebar">
+<div class="sidebar-title">
+        DASHBOARDS
+    </div>
+<button class="nav-button active" onclick="showWorkspace('gcs', this)">
+<span class="nav-number">
+            01
+        </span>
+
+        GCS
+
+    </button>
+<button class="nav-button" onclick="showWorkspace('abex', this)">
+<span class="nav-number">
+            02
+        </span>
+
+        ABEX
+
+    </button>
+<button class="nav-button" onclick="showWorkspace('rado', this)">
+<span class="nav-number">
+            03
+        </span>
+
+        RADO
+
+    </button>
+<button class="nav-button" onclick="showWorkspace('idmo', this)">
+<span class="nav-number">04</span>
+        IDMO
+</button>
+
+</aside>
+
+<section class="content">
+
+<div class="workspace active" id="gcsWorkspace">
+<div class="gcs-layout">
+<!-- CAMERA SYSTEM -->
+<div class="panel camera-panel">
+<div class="panel-title">
+<span>
+                    ROVER CAMERA SYSTEM
+                </span>
+<span>
+                    LIVE STREAM
+                </span>
+</div>
+<div class="camera-grid">
+<!-- FRONT CAM -->
+<div class="camera-box" onclick="openFullscreenCamera(0)">
+<span class="camera-label">
+                        FRONT CAM
+                    </span>
+<span class="camera-status" id="cameraStatus1">
+
+                        WAITING
+
+                    </span>
+<video autoplay="" id="cameraVideo1" muted="" playsinline="">
+</video>
+<div class="camera-placeholder" id="placeholder1">
+
+                        FRONT CAM
+
+                    </div>
+<div class="camera-performance" id="cameraPerformance1">
+
+                        LATENCY: -- ms   FPS: --
+
+                    </div>
+<button aria-label="Previous camera" class="camera-tile-arrow camera-tile-arrow-left" onclick="openAdjacentCamera(0, -1, event)" type="button">
+    ←
+</button>
+<button aria-label="Next camera" class="camera-tile-arrow camera-tile-arrow-right" onclick="openAdjacentCamera(0, 1, event)" type="button">
+    →
+</button>
+</div>
+<!-- REAR CAM -->
+<div class="camera-box" onclick="openFullscreenCamera(1)">
+<span class="camera-label">
+                        REAR CAM
+                    </span>
+<span class="camera-status" id="cameraStatus2">
+
+                        WAITING
+
+                    </span>
+<video autoplay="" id="cameraVideo2" muted="" playsinline="">
+</video>
+<div class="camera-placeholder" id="placeholder2">
+
+                        REAR CAM
+
+                    </div>
+<div class="camera-performance" id="cameraPerformance2">
+
+                        LATENCY: -- ms   FPS: --
+
+                    </div>
+<button aria-label="Previous camera" class="camera-tile-arrow camera-tile-arrow-left" onclick="openAdjacentCamera(1, -1, event)" type="button">
+    ←
+</button>
+<button aria-label="Next camera" class="camera-tile-arrow camera-tile-arrow-right" onclick="openAdjacentCamera(1, 1, event)" type="button">
+    →
+</button>
+</div>
+<!-- ARM CAM -->
+<div class="camera-box" onclick="openFullscreenCamera(2)">
+<span class="camera-label">
+                        ARM CAM
+                    </span>
+<span class="camera-status" id="cameraStatus3">
+
+                        WAITING
+
+                    </span>
+<video autoplay="" id="cameraVideo3" muted="" playsinline="">
+</video>
+<div class="camera-placeholder" id="placeholder3">
+
+                        ARM CAM
+
+                    </div>
+<div class="camera-performance" id="cameraPerformance3">
+
+                        LATENCY: -- ms   FPS: --
+
+                    </div>
+<button aria-label="Previous camera" class="camera-tile-arrow camera-tile-arrow-left" onclick="openAdjacentCamera(2, -1, event)" type="button">
+    ←
+</button>
+<button aria-label="Next camera" class="camera-tile-arrow camera-tile-arrow-right" onclick="openAdjacentCamera(2, 1, event)" type="button">
+    →
+</button>
+</div>
+<!-- ANTENNA CAM -->
+<div class="camera-box" onclick="openFullscreenCamera(3)">
+<span class="camera-label">
+                        ANTENNA CAM
+                    </span>
+<span class="camera-status" id="cameraStatus4">
+
+                        WAITING
+
+                    </span>
+<video autoplay="" id="cameraVideo4" muted="" playsinline="">
+</video>
+<div class="camera-placeholder" id="placeholder4">
+
+                        ANTENNA CAM
+
+                    </div>
+<div class="camera-performance" id="cameraPerformance4">
+
+                        LATENCY: -- ms   FPS: --
+
+                    </div>
+<button aria-label="Previous camera" class="camera-tile-arrow camera-tile-arrow-left" onclick="openAdjacentCamera(3, -1, event)" type="button">
+    ←
+</button>
+<button aria-label="Next camera" class="camera-tile-arrow camera-tile-arrow-right" onclick="openAdjacentCamera(3, 1, event)" type="button">
+    →
+</button>
+</div>
+</div>
+</div>
+<!-- TELEMETRY -->
+<div class="gcs-right-stack">
+<div class="panel telemetry-panel">
+<div class="panel-title">
+<span>
+                    ROVER TELEMETRY
+                </span>
+<span>
+                    LIVE
+                </span>
+</div>
+<div class="telemetry-grid">
+<div class="telemetry-item">
+<span>
+                        BATTERY
+                    </span>
+<strong id="telemetryBattery">
+                        --
+                    </strong>
+</div>
+<div class="telemetry-item">
+<span>
+                        VOLTAGE
+                    </span>
+<strong id="voltage">
+                        --
+                    </strong>
+</div>
+<div class="telemetry-item">
+<span>
+                        GPS
+                    </span>
+<strong id="gps">
+                        --
+                    </strong>
+</div>
+</div>
+</div>
+<!-- COMPUTE CONNECTIVITY -->
+<div class="compute-connectivity">
+<div class="compute-connectivity-title">
+<span>COMPUTE CONNECTIVITY</span>
+<span>LIVE</span>
+</div>
+<div class="compute-connectivity-grid">
+<div class="compute-status-box">
+<span>JETSON</span>
+<strong class="compute-status-value" id="jetsonStatus">
+<i class="compute-status-dot"></i>
+<b>--</b>
+</strong>
+</div><div class="compute-status-box">
+<span>MICROCONTROLLER</span>
+<strong class="compute-status-value" id="microcontrollerStatus">
+<i class="compute-status-dot"></i>
+<b>--</b>
+</strong>
+</div>
+</div>
+</div>
+</div>
+<!-- BOTTOM -->
+<div class="gcs-bottom">
+<!-- LOG -->
+<div class="panel">
+<div class="panel-title">
+<span>
+                        SYSTEM LOG
+                    </span>
+</div>
+<div class="log" id="systemLog">
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- GCS PANORAMA — RIGHT EDGE SLIDING TAB -->
+<div class="panorama-dock" id="gcsPanoramaDock">
+    <button class="panorama-tab" type="button" aria-label="Open GCS panorama" onclick="capturePanorama(event)">
+        <span class="panorama-tab-icon">▣</span>
+        <span class="panorama-tab-label">PANORAMA</span>
+    </button>
+    <div class="panorama-panel" aria-label="Front Left panorama capture">
+        <div class="panorama-panel-header">
+            <span>FRONT LEFT PANORAMA</span>
+            <span class="panorama-live" id="gcsPanoramaStatus">READY</span>
+        </div>
+        <div class="panorama-count" id="gcsPanoramaCount">0 / 3</div>
+        <div class="panorama-hint">Each click captures FRONT LEFT. The 3rd click stitches automatically.</div>
+    </div>
+</div>
+
+<div class="workspace" id="abexWorkspace">
+<div class="abex-layout">
+<!-- DRILL CAMERA -->
+<div class="panel abex-panel">
+<div class="panel-title">
+<span>
+                    DRILL CAMERA
+                </span>
+<span>
+                    LIVE
+                </span>
+</div>
+<div class="single-video abex-camera-click" onclick="openAbexFullscreen('abexDrillVideo', 'DRILL CAMERA')">
+<video autoplay="" id="abexDrillVideo" muted="" playsinline="">
+</video>
+<div class="video-empty">
+                    DRILL CAMERA
+                </div>
+<div class="abex-camera-performance" id="abexDrillPerformance">
+
+                    LATENCY: -- ms   FPS: --
+
+                </div>
+</div>
+</div>
+<!-- ENVIRONMENT DATA -->
+
+<!-- TEST CAMERA -->
+<div class="panel abex-panel">
+<div class="panel-title">
+<span>
+                    TEST CAMERA
+                </span>
+<span>
+                    ABEX
+                </span>
+</div>
+<div class="single-video abex-camera-click" onclick="openAbexFullscreen('abexTestVideo', 'TEST CAMERA')">
+<video autoplay="" id="abexTestVideo" muted="" playsinline="">
+</video>
+<div class="video-empty">
+                    TEST CAMERA
+                </div>
+<div class="abex-camera-performance" id="abexTestPerformance">
+
+                    LATENCY: -- ms   FPS: --
+
+                </div>
+</div>
+</div>
+
+<!-- ABEX TEST CONTROLS -->
+<div class="abex-controls-below">
+<div class="abex-header-controls">
+<button class="test-button" onclick="captureAbexTest('A', this)">A</button>
+<button class="test-button" onclick="captureAbexTest('B', this)">B</button>
+<button class="test-button" onclick="captureAbexTest('C', this)">C</button>
+<button class="test-button" onclick="captureAbexTest('D', this)">D</button>
+<button class="test-button" onclick="captureAbexTest('E', this)">E</button>
+</div>
+</div>
+
+<!-- MICROSCOPE CAMERA -->
+<div class="panel abex-panel abex-microscope">
+<div class="panel-title">
+<span>
+                    MICROSCOPIC CAMERA
+                </span>
+<span>
+                    LIVE
+                </span>
+</div>
+<div class="single-video abex-camera-click" onclick="openAbexFullscreen('abexMicroscopeVideo', 'MICROSCOPIC CAMERA')">
+<video autoplay="" id="abexMicroscopeVideo" muted="" playsinline="">
+</video>
+<div class="video-empty">
+                    MICROSCOPIC CAMERA
+                </div>
+<div class="abex-camera-performance" id="abexMicroscopePerformance">
+
+                    LATENCY: -- ms   FPS: --
+
+                </div>
+</div>
+</div>
+<!-- SPECTROMETER -->
+<div class="panel abex-panel">
+<div class="panel-title">
+<span>
+                    SPECTROMETER
+                </span>
+<span>
+                    LIVE GRAPH
+                </span>
+</div>
+<div class="spectrum">
+<canvas id="spectrumCanvas"></canvas>
+</div>
+</div>
+<!-- O2 / NPK / BME -->
+</div>
+
+<!-- ABEX SENSOR DATA — COLLAPSED HOVER TAB -->
+<div class="abex-sensor-dock" id="abexSensorDock">
+    <button
+        class="abex-sensor-tab"
+        type="button"
+        aria-label="Open ABEX sensor data"
+        onclick="toggleAbexSensorDock(event)"
+    >
+        <span class="abex-sensor-tab-icon">◈</span>
+        <span class="abex-sensor-tab-label">SENSOR DATA</span>
+    </button>
+
+    <div class="abex-sensor-panel" aria-label="ABEX live sensor data">
+        <div class="abex-sensor-panel-header">
+            <span>ABEX SENSOR DATA</span>
+            <span class="abex-sensor-live">LIVE</span>
+        </div>
+
+        <div class="abex-sensor-grid">
+            <div class="abex-sensor-item">
+                <span>TEMPERATURE</span>
+                <strong id="abexTemperature">-- °C</strong>
+            </div>
+            <div class="abex-sensor-item">
+                <span>HUMIDITY</span>
+                <strong id="abexHumidity">-- %</strong>
+            </div>
+            <div class="abex-sensor-item">
+                <span>PRESSURE</span>
+                <strong id="abexPressure">-- kPa</strong>
+            </div>
+            <div class="abex-sensor-item">
+                <span>SOIL MOISTURE</span>
+                <strong id="abexSoil">-- %</strong>
+            </div>
+            <div class="abex-sensor-item">
+                <span>NITROGEN (N)</span>
+                <strong id="abexNitrogen">-- kg/ha</strong>
+            </div>
+            <div class="abex-sensor-item">
+                <span>PHOSPHORUS (P)</span>
+                <strong id="abexPhosphorus">-- kg/ha</strong>
+            </div>
+            <div class="abex-sensor-item">
+                <span>POTASSIUM (K)</span>
+                <strong id="abexPotassium">-- kg/ha</strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<!-- ABEX PANORAMA — RIGHT EDGE SLIDING TAB -->
+<div class="panorama-dock" id="abexPanoramaDock">
+    <button class="panorama-tab" type="button" aria-label="Open ABEX panorama" onclick="capturePanorama(event)">
+        <span class="panorama-tab-icon">▣</span>
+        <span class="panorama-tab-label">PANORAMA</span>
+    </button>
+    <div class="panorama-panel" aria-label="Front Left panorama capture">
+        <div class="panorama-panel-header">
+            <span>FRONT LEFT PANORAMA</span>
+            <span class="panorama-live" id="abexPanoramaStatus">READY</span>
+        </div>
+        <div class="panorama-count" id="abexPanoramaCount">0 / 3</div>
+        <div class="panorama-hint">Each click captures FRONT LEFT. The 3rd click stitches automatically.</div>
+    </div>
+</div>
+
+<div class="workspace" id="idmoWorkspace">
+  <div class="idmo-two-camera-grid">
+    <div class="panel idmo-camera-panel">
+      <div class="panel-title"><span>ARM CAM</span><span>LIVE</span></div>
+      <div class="idmo-camera-view">
+        <video autoplay id="idmoArmCamera" muted playsinline></video>
+        <div class="idmo-camera-placeholder" id="idmoArmCameraPlaceholder">ARM CAMERA</div>
+      </div>
+    </div>
+    <div class="panel idmo-camera-panel">
+      <div class="panel-title"><span>ANTENNA CAM</span><span>LIVE</span></div>
+      <div class="idmo-camera-view">
+        <video autoplay id="idmoAntennaCamera" muted playsinline></video>
+        <div class="idmo-camera-placeholder" id="idmoAntennaCameraPlaceholder">ANTENNA CAMERA</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="workspace" id="radoWorkspace">
+<div class="rado-mode-switcher" aria-label="RADO modes" style="display:none">
+<button class="rado-mode-tab active" id="radoReconTab" onclick="switchRadoModeRadoOnly('reconnaissance')">
+<span>RECONNAISSANCE</span>
+</button>
+<button class="rado-mode-tab" id="radoDeliveryTab" onclick="switchRadoModeRadoOnly('delivery')">
+<span>AUTONOMOUS</span>
+</button>
+</div>
+<div class="rado-mode-view" id="radoReconView" style="display:none">
+<div class="rado-layout">
+<div class="panel rado-map">
+<div class="panel-title">
+<span>
+                    NAVIGATION / MAP
+                </span>
+<span>
+                    GNSS / IMU
+                </span>
+</div>
+<div class="map-area">
+<div class="rover-marker"></div>
+<div class="target-marker"></div>
+</div>
+</div>
+<div class="panel rado-recon-cameras-panel">
+<div class="panel-title">
+<span>
+                    RECONNAISSANCE CAMERAS
+                </span>
+<span>
+                    LIVE
+                </span>
+</div>
+<div class="rado-recon-camera-grid">
+<div class="rado-recon-camera-card">
+<div class="rado-recon-camera-name">
+                        FRONT CAM
+                    </div>
+<div class="rado-recon-camera-feed" onclick="openRadoReconFullscreen('radoFrontLeftCamera', 'FRONT CAM')">
+<video autoplay="" id="radoFrontLeftCamera" muted="" playsinline="">
+</video>
+<div class="recon-camera-metrics" data-camera="radoFrontLeftCamera">
+
+                            LATENCY: -- ms   FPS: --
+
+                        </div>
+<span class="rado-recon-camera-placeholder">
+                            FRONT CAMERA
+                        </span>
+</div>
+</div>
+<div class="rado-recon-camera-card">
+<div class="rado-recon-camera-name">
+                        REAR CAM
+                    </div>
+<div class="rado-recon-camera-feed" onclick="openRadoReconFullscreen('radoFrontRightCamera', 'REAR CAM')">
+<video autoplay="" id="radoFrontRightCamera" muted="" playsinline="">
+</video>
+<div class="recon-camera-metrics" data-camera="radoFrontRightCamera">
+
+                            LATENCY: -- ms   FPS: --
+
+                        </div>
+<span class="rado-recon-camera-placeholder">
+                            REAR CAMERA
+                        </span>
+</div>
+</div>
+<div class="rado-recon-camera-card">
+<div class="rado-recon-camera-name">
+                        REAR CAM
+                    </div>
+<div class="rado-recon-camera-feed" onclick="openRadoReconFullscreen('radoRearCamera', 'REAR CAM')">
+<video autoplay="" id="radoRearCamera" muted="" playsinline="">
+</video>
+<div class="recon-camera-metrics" data-camera="radoRearCamera">
+
+                            LATENCY: -- ms   FPS: --
+
+                        </div>
+<span class="rado-recon-camera-placeholder">
+                            REAR CAMERA
+                        </span>
+</div>
+</div>
+<div class="rado-recon-camera-card">
+<div class="rado-recon-camera-name">
+                        ARM CAM
+                    </div>
+<div class="rado-recon-camera-feed" onclick="openRadoReconFullscreen('radoArmCamera', 'ARM CAM')">
+<video autoplay="" id="radoArmCamera" muted="" playsinline="">
+</video>
+<div class="recon-camera-metrics" data-camera="radoArmCamera">
+
+                            LATENCY: -- ms   FPS: --
+
+                        </div>
+<span class="rado-recon-camera-placeholder">
+                            ARM CAMERA
+                        </span>
+</div>
+</div>
+</div>
+</div>
+<div class="rado-controls">
+</div>
+</div>
+</div>
+
+<div class="rado-mode-view rado-autonomous-view" id="radoAutonomousView" style="display:block; visibility:visible; opacity:1; pointer-events:auto;">
+<div class="rado-auto-dashboard">
+<div class="rado-auto-main panel">
+<div class="panel-title">
+<span>
+                        AUTONOMOUS DELIVERY DASHBOARD
+                    </span>
+</div>
+<div class="rado-auto-info-grid">
+<div class="rado-auto-info-card">
+<div class="rado-auto-card-title">
+                            TARGET OBJECT
+                        </div>
+<div class="rado-auto-empty" id="radoTargetObject">
+
+                            No target selected
+
+                        </div>
+</div>
+<div class="rado-auto-info-card">
+<div class="rado-auto-card-title">
+                            ROVER STATUS
+                        </div>
+<div class="rado-auto-data-row">
+<span>
+                                Current Speed:
+                            </span>
+<strong id="radoAutoSpeed">
+                                0.0 m/s
+                            </strong>
+</div>
+<div class="rado-auto-data-row">
+<span>
+                                Target Cone Dist:
+                            </span>
+<strong id="radoAutoConeDist">
+                                -- m
+                            </strong>
+</div>
+<div class="rado-auto-data-row">
+<span>
+                                Motor Status:
+                            </span>
+<strong id="radoAutoMotorStatus">
+                                IDLE
+                            </strong>
+</div>
+<div class="rado-auto-data-row">
+<span>
+                                System Load:
+                            </span>
+<strong id="radoAutoLoad">
+                                CPU: 45%
+                            </strong>
+</div>
+</div>
+<div class="rado-auto-info-card">
+<div class="rado-auto-card-title">
+                            NAVIGATION
+                        </div>
+<div class="rado-auto-data-row">
+<span>
+                                Rover GPS:
+                            </span>
+<strong id="radoAutoGps">
+                                13.331600N, 74.746100E
+                            </strong>
+</div>
+<div class="rado-auto-data-row">
+<span>
+                                Dropoff GPS Dist:
+                            </span>
+<strong id="radoAutoDropoff">
+                                -- m
+                            </strong>
+</div>
+<div class="rado-auto-data-row">
+<span>
+                                IMU (R/P/Y):
+                            </span>
+<strong id="radoAutoImu">
+                                0.5°/2.1°
+                            </strong>
+</div>
+<div class="rado-auto-data-row">
+<span>
+                                GPS Lock:
+                            </span>
+<strong id="radoAutoGpsLock">
+                                SAT: 12 (FIX)
+                            </strong>
+</div>
+</div>
+</div>
+</div>
+<div class="panel rado-auto-gps-panel">
+<div class="panel-title">
+<span>
+                        GPS
+                    </span>
+</div>
+<div class="rado-auto-gps-map">
+<div class="rover-marker"></div>
+</div>
+</div>
+<div class="panel rado-auto-remote">
+<div class="panel-title">
+<span>
+                        REMOTE DESKTOP (JETSON)
+                    </span>
+</div>
+<div class="rado-auto-remote-screen">
+<span>
+                        Remote Desktop Offline
+                    </span>
+</div>
+</div>
+<div class="panel rado-auto-cv">
+<div class="rado-auto-cv-screen">
+<span>
+                        cv-camera Offline
+                    </span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- RADO RECON CAMERA FULLSCREEN -->
+<div class="rado-recon-fullscreen" id="radoReconCameraFullscreen" onclick="closeRadoReconFullscreen(event)">
+<video autoplay="" id="radoReconFullscreenVideo" muted="" playsinline="">
+</video>
+<div class="rado-recon-fullscreen-name" id="radoReconFullscreenName">
+
+                CAMERA
+
+            </div>
+<div class="rado-recon-fullscreen-status" id="radoReconFullscreenStatus">
+
+                LIVE
+
+            </div>
+<div class="rado-recon-fullscreen-metrics" id="radoReconFullscreenMetrics">
+
+                LATENCY: -- ms   FPS: --
+
+            </div>
+<button class="rado-recon-fullscreen-close" onclick="closeRadoReconFullscreen(event)">
+
+                ✕
+
+            </button>
+</div>
+
+</div>
+</section></main></div>
+
+
+<div class="camera-fullscreen" id="cameraFullscreen">
+<video autoplay="" id="fullscreenVideo" muted="" playsinline="">
+</video>
+<div class="fullscreen-camera-name" id="fullscreenCameraName">
+
+        FRONT CAMERA
+
+    </div>
+<div class="fullscreen-camera-status" id="fullscreenCameraStatus">
+
+        CONNECTING
+
+    </div>
+<div class="fullscreen-camera-performance" id="fullscreenCameraPerformance">
+
+        LATENCY: -- ms   FPS: --
+
+    </div>
+<button class="fullscreen-arrow left" onclick="fullscreenPreviousCamera(event)">
+
+        ←
+
+    </button>
+<button class="fullscreen-arrow right" onclick="fullscreenNextCamera(event)">
+
+        →
+
+    </button>
+<button class="fullscreen-close" onclick="closeFullscreenCamera(event)">
+
+        ✕
+
+    </button>
+<div class="fullscreen-camera-number" id="fullscreenCameraNumber">
+
+        CAMERA 1 / 4
+
+    </div>
+</div>
+<script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+
+<div class="abex-fullscreen-overlay" id="abexFullscreenOverlay" onclick="closeAbexFullscreen(event)">
+<div class="abex-fullscreen-header">
+<span id="abexFullscreenTitle">
+            ABEX CAMERA
+        </span>
+<button
+            class="abex-fullscreen-close abex-back-button"
+            type="button"
+            aria-label="Back to ABEX"
+            title="Back to ABEX"
+            onclick="closeAbexFullscreen(event)"
+        >
+            ←
+        </button>
+</div>
+<div class="abex-fullscreen-video-wrap" onclick="event.stopPropagation()">
+<video autoplay="" id="abexFullscreenVideo" muted="" playsinline="">
+</video>
+<div class="abex-fullscreen-performance" id="abexFullscreenPerformance">
+
+            LATENCY: -- ms   FPS: --
+
+        </div>
+</div>
+</div>
+<!-- PANORAMA RESULT OVERLAY -->
+<div class="panorama-result-overlay" id="panoramaResultOverlay" onclick="closePanoramaResult(event)">
+    <div class="panorama-result-card" onclick="event.stopPropagation()">
+        <div class="panorama-result-header">
+            <span id="panoramaResultTitle">PANORAMA READY</span>
+            <button type="button" onclick="closePanoramaResult(event)">CLOSE</button>
+        </div>
+        <img id="panoramaResultImage" alt="Front Left panorama" />
+    </div>
+</div>
+<script src="script_FIXED.js"></script></body>
+</html>
