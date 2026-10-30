@@ -1,0 +1,17 @@
+qbotix_camera_odom_relay:
+  ros__parameters:
+    input_odom_topic: /zed/zed_node/odom
+    output_odom_topic: /qbotix/odom
+    odom_frame: odom
+    camera_frame: zed_camera_link
+    base_frame: base_link
+    # PROVISIONAL. Measure the actual camera optical/mechanical link origin
+    # relative to base_link, then update BOTH this file and the URDF.
+    # These values currently match the provisional URDF mounting joint.
+    base_to_camera_x: 0.0
+    base_to_camera_y: 0.0
+    base_to_camera_z: 0.255
+    base_to_camera_roll: 0.0
+    base_to_camera_pitch: 0.0
+    base_to_camera_yaw: 0.0
+    publish_tf: true

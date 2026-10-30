@@ -1,0 +1,60 @@
+Great! 🎉 Your ZED 2i camera and RTAB-Map mapping are working. Now let's connect the **robot model to the mapping system**.
+
+We'll do this in stages:
+1. Connect the robot model to the ZED camera's TF tree.
+2. Display the robot and map together in RViz.
+3. Verify that the map updates as the camera moves.
+4. Prepare the system for Nav2 autonomous navigation.
+
+## Step 1: Check the current TF transforms
+
+Keep your ZED camera and RTAB-Map running.
+
+Open a **new terminal** and execute these commands one by one.
+
+**1. Check the robot's base transform:**
+
+```bash id="xly79l"
+ros2 run tf2_ros tf2_echo base_footprint base_link
+```
+
+**2. Check the camera's odometry transform:**
+
+Press `Ctrl+C` to stop the first command, then run:
+
+```bash id="zw31oe"
+ros2 run tf2_ros tf2_echo odom zed_camera_link
+```
+
+**3. Check whether the robot base and camera are connected:**
+
+```bash id="1fyl6w"
+ros2 run tf2_ros tf2_echo base_link zed_camera_mount_link
+```
+
+### What we're checking
+
+Your current robot model has these frames:
+
+```text id="6tnlrw"
+base_footprint
+    |
+    v
+base_link
+    |
+    v
+zed_camera_mount_link
+```
+
+The ZED driver publishes its own camera odometry:
+
+```text id="nz1j0g"
+odom
+  |
+  v
+zed_camera_link
+```
+
+We need to connect these frame trees without creating conflicting TF publishers.
+
+**Send me the output of the second command first** (`odom zed_camera_link`). Then we'll connect the frames correctly and display the rover with its map.

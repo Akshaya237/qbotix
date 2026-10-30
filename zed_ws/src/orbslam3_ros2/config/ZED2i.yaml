@@ -1,0 +1,84 @@
+%YAML:1.0
+
+#--------------------------------------------------------------------------------------------
+# System config
+#--------------------------------------------------------------------------------------------
+
+File.version: "1.0"
+
+#--------------------------------------------------------------------------------------------
+# Camera Parameters
+#--------------------------------------------------------------------------------------------
+
+Camera.type: "PinHole"
+
+# Left camera - rectified
+Camera1.fx: 521.616882
+Camera1.fy: 521.616882
+Camera1.cx: 630.149475
+Camera1.cy: 358.372162
+
+Camera1.k1: 0.0
+Camera1.k2: 0.0
+Camera1.p1: 0.0
+Camera1.p2: 0.0
+
+# Right camera - rectified
+Camera2.fx: 521.616882
+Camera2.fy: 521.616882
+Camera2.cx: 630.149475
+Camera2.cy: 358.372162
+
+Camera2.k1: 0.0
+Camera2.k2: 0.0
+Camera2.p1: 0.0
+Camera2.p2: 0.0
+
+Camera.width: 1280
+Camera.height: 720
+
+# ZED 2i camera frame rate
+Camera.fps: 60
+
+# ZED ROS image encoding is BGR
+Camera.RGB: 0
+
+# Stereo baseline / depth threshold
+Stereo.ThDepth: 60.0
+
+# Left camera -> right camera
+# Baseline = 62.600700 / 521.616882 = 0.120000 m
+Stereo.T_c1_c2: !!opencv-matrix
+  rows: 4
+  cols: 4
+  dt: f
+  data: [1.0, 0.0, 0.0, -0.120000,
+         0.0, 1.0, 0.0, 0.0,
+         0.0, 0.0, 1.0, 0.0,
+         0.0, 0.0, 0.0, 1.0]
+
+#--------------------------------------------------------------------------------------------
+# ORB Parameters
+#--------------------------------------------------------------------------------------------
+
+ORBextractor.nFeatures: 1200
+ORBextractor.scaleFactor: 1.2
+ORBextractor.nLevels: 8
+ORBextractor.iniThFAST: 20
+ORBextractor.minThFAST: 7
+
+#--------------------------------------------------------------------------------------------
+# Viewer Parameters
+#--------------------------------------------------------------------------------------------
+
+Viewer.KeyFrameSize: 0.05
+Viewer.KeyFrameLineWidth: 1.0
+Viewer.GraphLineWidth: 0.9
+Viewer.PointSize: 2.0
+Viewer.CameraSize: 0.08
+Viewer.CameraLineWidth: 3.0
+Viewer.ViewpointX: 0.0
+Viewer.ViewpointY: -0.7
+Viewer.ViewpointZ: -1.8
+Viewer.ViewpointF: 500.0
+Viewer.imageViewScale: 1.0
