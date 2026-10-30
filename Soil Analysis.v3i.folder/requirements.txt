@@ -1,0 +1,21 @@
+# ─────────────────────────────────────────────
+# requirements.txt — Soil Classifier
+# Install with: pip install -r requirements.txt
+# ─────────────────────────────────────────────
+
+# TensorFlow (GPU build — works on RTX 3050 with CUDA 11.x / 12.x)
+tensorflow[and-cuda]>=2.14.0
+
+# Core ML/data
+numpy>=1.24
+scikit-learn>=1.3
+
+# Visualisation
+matplotlib>=3.7
+seaborn>=0.12
+
+# Image handling
+Pillow>=10.0
+
+# Optional: TFLite runtime only (lighter than full TF — for inference on edge devices)
+# tflite-runtime>=2.14
