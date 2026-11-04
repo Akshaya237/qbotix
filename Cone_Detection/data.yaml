@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['0 cone']
+
+roboflow:
+  workspace: bunnys-space
+  project: cone-detection-tyuid
+  version: 3
+  license: MIT
+  url: https://universe.roboflow.com/bunnys-space/cone-detection-tyuid/dataset/3

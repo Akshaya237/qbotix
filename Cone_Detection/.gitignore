@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+cone_env/
+venv/
+.env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Cache
+.cache/
+
+# Temporary files
+*.log
+.DS_Store
+
+# Training runs (exclude if not needed)
+runs/
